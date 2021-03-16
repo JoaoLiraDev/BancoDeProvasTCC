@@ -46,13 +46,13 @@ const Menu = (props) => {
                                 <NavLink href="/">Questões</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/">Criar</NavLink>
+                                <NavLink href="/createQuestions">Criar</NavLink> 
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/">Download</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/">Configurações</NavLink>
+                                <NavLink href="/pageConfig">Configurações</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
