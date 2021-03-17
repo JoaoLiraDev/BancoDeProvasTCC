@@ -10,6 +10,7 @@ function Config() {
       <Menu />
   <Form>
         <ButtonGroup vertical>
+      <br />  
           <Button>Seu perfil</Button>
       <br />
           <Button>Notificações</Button>
