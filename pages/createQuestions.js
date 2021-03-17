@@ -2,7 +2,7 @@ import Menu from "../components/topmenu";
 import Smallfooter from "../components/smallfooter";
 import React from "react";
 import Head from "next/head";
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col,} from 'reactstrap';
+import { Form, FormGroup, Label, Input, Container, Row, Col,} from 'reactstrap';
 
 
 function createQuestion() {
@@ -77,7 +77,6 @@ function createQuestion() {
                             <option>1ºAno</option>
                             <option>2ºAno</option>
                             <option>3ºAno</option>
-                            <h2></h2>
                         </Input>
                     </FormGroup>
                 </Col>
