@@ -17,7 +17,7 @@ function HomePage() {
         <div>
             <Head>
                 <title>
-                    Banco de Provas - FIEB
+                    MyQuestions
                 </title>
             </Head>
 
@@ -25,7 +25,6 @@ function HomePage() {
             <style>
                 {`
                 .main{
-                    background-color:rgba(50, 33, 83, 0.25);
                     margin:0 !important;
                 }
                 `}

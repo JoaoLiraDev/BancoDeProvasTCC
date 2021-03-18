@@ -10,7 +10,7 @@ function createQuestion() {
         <div>
             <Head>
                 <title>
-                    Banco de Provas - FIEB
+                    MyQuestions 
                 </title>
             </Head>
             <Menu/>
@@ -30,11 +30,11 @@ function createQuestion() {
                         text-transform: uppercase;
                         font-size: 11px;
                         font-weight: bold;
-                        
+                        color:#E96C64 !important;
                         margin: 0 15px;
                         padding: 10px 15px;
                         overflow: hidden;
-                        border: 2px solid #34CB79;
+                        border: 2px solid #E96C64;
                         position: relative;
                         
                     }
@@ -46,25 +46,25 @@ function createQuestion() {
                       transform: translate(-50%, -50%);
                       width: 100%;
                       height: 100%;
-                      
-                      background-color: #34CB79;
+                      color:#E96C64 ;
+                      background-color: #E96C64;
                       
                       z-index: -1;
                       
                       transition: 0.7s ease;
                     }
                     .btnAnimado{
-                        
+                        color:#E96C64 !important ;
                         
                     }.btnAnimado:before{
                       content:'';
                         width: 0;
                       height: 100%;
-                      
+                      color:#fff ;
 
                     }.btnAnimado:hover:before{
                         width: 100%;
-                      
+                        color:#fff ;
                     }
                     `}
                 </style>

@@ -19,7 +19,7 @@ const Menu = (props) => {
         <div>
             <style>
                 {`.menu-custom{
-                    background-color:#322153;
+                    background-color:#000;
                 }
                 `}
             </style>
@@ -27,10 +27,10 @@ const Menu = (props) => {
                 <Container>
                     <NavbarBrand href="/">
                         <Image
-                            src="/logo-fieb.png"
+                            src="/shortLogo.png"
                             alt="Picture of the author"
-                            width={164}
-                            height={58}
+                            width={188}
+                            height={55}
                         />
                     </NavbarBrand>
 
@@ -40,8 +40,8 @@ const Menu = (props) => {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <NavItem>
-                                <NavLink href="/">Pesquisar</NavLink>
-                            </NavItem>
+                                <NavLink href="/search">Pesquisar</NavLink>
+                            </NavItem> 
                             <NavItem>
                                 <NavLink href="/">Questões</NavLink>
                             </NavItem>

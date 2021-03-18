@@ -7,7 +7,7 @@ const Smallfooter = () => {
         <Jumbotron fluid className="rodape" >
             <style>
                 {`.rodape{
-                    background-color: #322153;
+                    background-color: #000;
                     color: #fff;
                     padding-top: 10px;
                     padding-bottom: 10px;
