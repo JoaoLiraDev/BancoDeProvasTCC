@@ -31,7 +31,7 @@ function HomePage() {
             </style>
 
             <Jumbotron className="main">
-                <h1></h1>
+                
                 <Carocel />
 
                 <p>

@@ -17,7 +17,7 @@ import {
 
 
 
-function Login(props) {
+function Recuperar(props) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -78,17 +78,14 @@ function Login(props) {
                 #btnCadastrar{
                     width: 150px;
                 }
-                .divMain1{
-                    display: inline;    
-                    width:50%;
-                    float:left;
-                    margin-top:80px;
-                }
                 .divMain2{
-                    display: inline;
-                    width:50%;
-                    float:right;
-                    margin-top:180px;
+                    width: 100%;
+                    height: 100vh;
+                    background-color: ##E5CECC;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center
                 }
                 #redefinir{
                     text-decoration: none;
@@ -117,7 +114,7 @@ function Login(props) {
                                     <Input className="form-control" type="password" placeholder="Password:" className="mr-sm-2" />
                                     <div className="group">
                                     <a href="/" className="btn btnAnimado" id="btnLogin">Login</a>
-                                    <a href="/recuperar" id="redefinir" >Esqueceu sua senha?</a>
+                                    <a href="" id="redefinir" >Esqueceu sua senha?</a>
                                     </div>
                                 </FormGroup>
                             </Form>
@@ -127,10 +124,8 @@ function Login(props) {
             </Navbar>
 
 
-            <Container className="imgLogin">
-                <div className="divMain1">
-                    <Image src="/teaching.svg" alt="ImagemLogin" width={600} height={600} />
-                </div>
+            <>
+                
 
                 <div className="divMain2">
                     <Form className="form">
@@ -163,9 +158,9 @@ function Login(props) {
                 </div>
 
 
-            </Container>
+            </>
         </div>
     );
 
 };
-export default Login;
+export default Recuperar;

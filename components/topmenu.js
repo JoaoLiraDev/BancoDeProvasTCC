@@ -59,7 +59,7 @@ const Menu = (props) => {
                 </Container>
                 <Nav>
                     <NavItem>
-                        <NavLink href="/"><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
+                        <NavLink href="/login"><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>

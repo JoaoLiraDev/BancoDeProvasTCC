@@ -30,7 +30,6 @@ function createQuestion() {
                         text-transform: uppercase;
                         font-size: 11px;
                         font-weight: bold;
-                        color:#E96C64 !important;
                         margin: 0 15px;
                         padding: 10px 15px;
                         overflow: hidden;
@@ -54,7 +53,7 @@ function createQuestion() {
                       transition: 0.7s ease;
                     }
                     .btnAnimado{
-                        color:#E96C64 !important ;
+                        
                         
                     }.btnAnimado:before{
                       content:'';

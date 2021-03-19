@@ -1,7 +1,7 @@
 import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
+import { Button, ButtonGroup, Jumbotron, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Fade } from 'reactstrap';
 
 
 function Config(props) {
@@ -11,11 +11,11 @@ function Config(props) {
   } = props;
 
   const [modal, setModal] = useState(false);
-
+  const [fadeIn, setFadeIn] = useState(true);
+  const toggle = () => setFadeIn(!fadeIn);
   return (
     <div>
       <Menu />
-        <Container className="main">
           <style>
             {`
               .main{
@@ -26,12 +26,13 @@ function Config(props) {
                 text-transform: uppercase;
                 font-size: 11px;
                 font-weight: bold;
-                color:#E96C64 !important;
                 margin: 0 15px;
                 padding: 10px 15px;
                 overflow: hidden;
                 border: 2px solid #E96C64;
                 position: relative;
+                z-index: 2; 
+                
                 
             }
             .btn:before{
@@ -42,25 +43,22 @@ function Config(props) {
               transform: translate(-50%, -50%);
               width: 100%;
               height: 100%;
-              color:#E96C64!important;
               background-color: #E96C64;
-              
-              z-index: -1;
-              
+              z-index: -1;     
               transition: 0.7s ease;
             }
             .btnAnimado{
-                color:#fff !important;
+                color:#E96C64 ;
                 
             }.btnAnimado:before{
               content:'';
-                width: 0;
+              width: 0;
               height: 100%;
               color:#fff !important;
-
             }.btnAnimado:hover:before{
-                width: 110%;
+                width: 100%;
                 color:#fff !important;
+              
             }
               #imgpos {
               position: absolute;
@@ -75,20 +73,69 @@ function Config(props) {
               left: 60%;
               top: 15%
               }
+              .descr-top{
+                background-color: #fff;
+                margin-top: 2rem !important;
+              }
+              .circle{
+                margin: 5px;
+                padding: 5px;
+                height: 50px;
+                width: 50px;
+                border-radius: 35px;
+              }
             `}
           </style>
 
           <div>
-            <img src="profile.png" width="256px" height="256px" alt="logo do site Maujor" id="imgpos" />
-                    <h1 className="text">Profile</h1>
-                <button type="submit" className="btn btnAnimado">Edit</button>
-                <button type="submit" className="btn btnAnimado">Switch accounts</button>
-                <button type="submit" className="btn btnAnimado">Delete account</button>
-          </div>
-        </Container>
+            <Jumbotron fluid className="descr-top">
+              <Container className="text-center">
+                <img src="profile.png" width="256px" height="256px" alt="img profile"/>
+                  <h1 className="display-4">Profile</h1>
+                  <p className="lead">Username</p>
+                  <p className="lead">Email@example.com.br
+                  <button onClick={toggle} className="btn btnAnimado circle">Edit</button>
+                 
+                  <Fade in={fadeIn} tag="h5" className="mt-3">
+                    
+                    <Form>
+
+                      <FormGroup controlId="formGroupEmail">
+                        <Label>Email address</Label>
+                        <Input type="email" placeholder="Enter email" />
+                      </FormGroup>
+
+                      <FormGroup controlId="formGroupPassword">
+                        <Label>Password</Label>
+                        <Input type="password" placeholder="Password" />
+                      </FormGroup>
+
+                    </Form>
+                  </Fade>  
+                  </p>
+
+                    <button className="btn btnAnimado" onClick={toggle}>{buttonLabel}Delete Account</button>
+                  <Modal isOpen={modal} toggle={toggle} className={className} >
+                    <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
+                      <ModalBody>
+                        Are you sure you want to delete your account?
+                        In a few days it will expire and you will no longer have access!
+                      </ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={toggle}>Yes, I'm sure!</Button>{' '}
+                      <Button color="secondary" onClick={toggle}>No, wrong button...</Button>
+                    </ModalFooter>
+                  </Modal>
+                <button className="btn btnAnimado">Switch Accounts</button>
+              </Container>
+            </Jumbotron>
+           </div>            
     </div>
-  );
 
+
+
+
+
+  );  
 };
-
 export default Config;

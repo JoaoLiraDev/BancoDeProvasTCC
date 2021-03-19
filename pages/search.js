@@ -31,11 +31,15 @@ function webSearch() {
                 .main{
                     margin-top:100px !important;
                 }
+                .button{
+                    padding: 30px;
+                    margin-left: 10px;
+                }
                 `}
             </style>
             <Container className="main">
             <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-                <Button id="caret">Série</Button>
+                <Button id="caret" class="button">Série</Button>
                 <DropdownToggle split />
                 <DropdownMenu>
                     <DropdownItem>1º ano</DropdownItem>
@@ -45,7 +49,7 @@ function webSearch() {
             </ButtonDropdown>
 
             <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-            <Button id="caret">Trimestre</Button>
+            <Button id="caret" class="button">Trimestre</Button>
                 <DropdownToggle split />
                 <DropdownMenu>
                     <DropdownItem>1º trimestre</DropdownItem>
@@ -55,7 +59,7 @@ function webSearch() {
             </ButtonDropdown>
 
             <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-            <Button id="caret">Matéria</Button>
+            <Button id="caret" class="button">Matéria</Button>
                 <DropdownToggle split />
                 <DropdownMenu>
                     <DropdownItem header>Núcleo Normal</DropdownItem>
