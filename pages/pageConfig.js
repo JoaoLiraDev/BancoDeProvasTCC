@@ -12,7 +12,7 @@ function Config(props) {
 
   const [modal, setModal] = useState(false);
   const [fadeIn, setFadeIn] = useState(true);
-  const toggle = () => setFadeIn(!fadeIn);
+  const toggle = () => setModal(!modal);
   return (
     <div>
       <Menu />
@@ -77,12 +77,8 @@ function Config(props) {
                 background-color: #fff;
                 margin-top: 2rem !important;
               }
-              .circle{
-                margin: 5px;
-                padding: 5px;
-                height: 50px;
-                width: 50px;
-                border-radius: 35px;
+              .form_meio{
+                margin-left:25rem !important; 
               }
             `}
           </style>
@@ -93,49 +89,49 @@ function Config(props) {
                 <img src="profile.png" width="256px" height="256px" alt="img profile"/>
                   <h1 className="display-4">Profile</h1>
                   <p className="lead">Username</p>
-                  <p className="lead">Email@example.com.br
-                  <button onClick={toggle} className="btn btnAnimado circle">Edit</button>
-                 
-                  <Fade in={fadeIn} tag="h5" className="mt-3">
-                    
-                    <Form>
-
-                      <FormGroup controlId="formGroupEmail">
-                        <Label>Email address</Label>
-                        <Input type="email" placeholder="Enter email" />
-                      </FormGroup>
-
-                      <FormGroup controlId="formGroupPassword">
-                        <Label>Password</Label>
-                        <Input type="password" placeholder="Password" />
-                      </FormGroup>
-
-                    </Form>
-                  </Fade>  
-                  </p>
-
+                  <p className="lead">Email@example.com.br</p>
+              </Container>
+              <Container className="form_meio">                   
+                  <Form>
+                  <Row>
+                    <Col className="col-md-4">
+                        <FormGroup controlId="formGroupEmail">
+                          <Label>Email address</Label>
+                          <Input type="email" placeholder="Enter email" />
+                        </FormGroup>
+                    </Col>
+                    <Col className="col-md-4">
+                        <FormGroup controlId="formGroupPassword">
+                          <Label>Password</Label>
+                          <Input type="password" placeholder="Password" />
+                        </FormGroup>
+                    </Col>
+                    <Col className="col-md-4">
+                        <FormGroup controlId="formGroupPhone">
+                          <Label>Phone number</Label>
+                          <Input type="phone" placeholder="Your number" />
+                        </FormGroup>
+                    </Col>
+                  </Row>
+                  </Form>
+                    <button className="btn btnAnimado">Confirm Email</button>  
                     <button className="btn btnAnimado" onClick={toggle}>{buttonLabel}Delete Account</button>
-                  <Modal isOpen={modal} toggle={toggle} className={className} >
-                    <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
-                      <ModalBody>
-                        Are you sure you want to delete your account?
-                        In a few days it will expire and you will no longer have access!
-                      </ModalBody>
-                    <ModalFooter>
-                      <Button color="primary" onClick={toggle}>Yes, I'm sure!</Button>{' '}
-                      <Button color="secondary" onClick={toggle}>No, wrong button...</Button>
-                    </ModalFooter>
-                  </Modal>
-                <button className="btn btnAnimado">Switch Accounts</button>
+                      <Modal isOpen={modal} toggle={toggle} className={className} >
+                        <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
+                          <ModalBody>
+                            Are you sure you want to delete your account?
+                            In a few days it will expire and you will no longer have access!
+                          </ModalBody>
+                        <ModalFooter>
+                          <Button color="primary" onClick={toggle}>Yes, I'm sure!</Button>{' '}
+                          <Button color="secondary" onClick={toggle}>No, wrong button...</Button>
+                        </ModalFooter>
+                      </Modal>
+                    <button className="btn btnAnimado">Submit</button>
               </Container>
             </Jumbotron>
            </div>            
     </div>
-
-
-
-
-
   );  
 };
 export default Config;
