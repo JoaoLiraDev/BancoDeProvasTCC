@@ -8,18 +8,31 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Container
+    Container, 
+    ButtonDropdown, 
+    DropdownToggle, 
+    DropdownMenu, 
+    DropdownItem,
+    UncontrolledDropdown
 } from 'reactstrap';
 
 const Menu = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
+
     return (
         <div>
             <style>
                 {`.menu-custom{
                     background-color:#000;
+                }
+                .textcolor{
+                    color:#000;
+                    text-decoration: none !important;
+                }
+                .bkdrop DropdownItem:hover{
+                    color:#c0c0c0;
                 }
                 `}
             </style>
@@ -48,16 +61,47 @@ const Menu = (props) => {
                             <NavItem>
                                 <NavLink href="/createQuestions">Criar</NavLink> 
                             </NavItem>
-                            <NavItem>
-                                <NavLink href="/">Download</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="/pageConfig">Configurações</NavLink>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </Container>
-                <Nav>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                Configurações
+                                </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem>
+                                            <NavItem>
+                                                <a href="/profile" className="textcolor">Profile</a>
+                                            </NavItem>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavItem>
+                                                <a href="/saved" className="textcolor">Saved</a>
+                                            </NavItem>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavItem>
+                                                <a href="/" className="textcolor">Notifications</a>
+                                            </NavItem>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavItem>
+                                                <a href="/" className="textcolor">Reminders</a>
+                                            </NavItem>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavItem>
+                                                <a href="/" className="textcolor">Download</a>
+                                            </NavItem>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavItem>
+                                                <a href="/login" className="textcolor">Log Out</a>
+                                            </NavItem>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                            </UncontrolledDropdown>
+                                </Nav>
+                            </Collapse>
+                        </Container>
+                        <Nav>
                     <NavItem>
                         <NavLink href="/login"><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
                     </NavItem>
