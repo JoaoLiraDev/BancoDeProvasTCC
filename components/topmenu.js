@@ -13,7 +13,8 @@ import {
     DropdownToggle, 
     DropdownMenu, 
     DropdownItem,
-    UncontrolledDropdown
+    UncontrolledDropdown,
+    Badge
 } from 'reactstrap';
 
 const Menu = (props) => {
@@ -56,7 +57,7 @@ const Menu = (props) => {
                                 <NavLink href="/search">Pesquisar</NavLink>
                             </NavItem> 
                             <NavItem>
-                                <NavLink href="/">Questões</NavLink>
+                                <NavLink href="/questions">Questões</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/createQuestions">Criar</NavLink> 
@@ -78,7 +79,7 @@ const Menu = (props) => {
                                         </DropdownItem>
                                         <DropdownItem>
                                             <NavItem>
-                                                <a href="/" className="textcolor">Notifications</a>
+                                                <a href="/" className="textcolor">Notifications <Badge color="secondary">9</Badge></a>
                                             </NavItem>
                                         </DropdownItem>
                                         <DropdownItem>
@@ -89,11 +90,6 @@ const Menu = (props) => {
                                         <DropdownItem>
                                             <NavItem>
                                                 <a href="/" className="textcolor">Download</a>
-                                            </NavItem>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavItem>
-                                                <a href="/login" className="textcolor">Log Out</a>
                                             </NavItem>
                                         </DropdownItem>
                                     </DropdownMenu>

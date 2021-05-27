@@ -57,8 +57,8 @@ const Carocel = (props) => {
                 <style>
                     {`
               .imgCarousel{
-                  height:300px;
-                  width:80%;
+                  height:400px;
+                  width:70%;
                   align:center;
               }
               `}

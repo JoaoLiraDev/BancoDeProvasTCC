@@ -16,7 +16,8 @@ import {
     Collapse,
     CardBody,
     Card,
-    Table
+    Table,
+    Badge
 } from 'reactstrap';
 
 
@@ -38,7 +39,7 @@ function webSearch() {
                         MyQuestions
                     </title>
                 </Head>
-
+                <FadeIn>
                 <Menu />
                 <style>
                     {`
@@ -95,12 +96,20 @@ function webSearch() {
                     #btnPesquisar{
                         float: right;
                     }
-                #myTable{
+                    #myTable{
                         margin-top: 20px;
+                    }
+                    #badgeConteudo{
+                        width: 100%;
+                        height: 20px;
+                        background-color: #000;
+                        color: white;
+                    }
+                    label.title {
+                        font-weight: bold;
                     }
                     `}
                 </style>
-                <FadeIn>
                     <Container className="main">
                     <Row>
                         <Col className="col-md-4">
@@ -149,49 +158,130 @@ function webSearch() {
                     </Row>
                     <Row>
                         <Col className="col-md-12 ">
-                            <button type="submit" className="btn btnAnimado" id="btnPesquisar" onClick={toggle} >Pesquisar</button>
+                            <button type="submit" className="btn btnAnimado" id="btnPesquisar">Pesquisar</button>
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="col-md-12">
-                            <Table id="myTable">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Professor</th>
-                                        <th>Matéria</th>
-                                        <th>Trimestre</th>
-                                        <th>Ano</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>João Lira</td>
-                                        <td>Python</td>
-                                        <td>3º Trimestre</td>
-                                        <td>3º Ano</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Marcelo Almeida</td>
-                                        <td>JavaScript</td>
-                                        <td>2º Trimestre</td>
-                                        <td>1º Ano</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Nicollety</td>
-                                        <td>React Native</td>
-                                        <td>1º Trimestre</td>
-                                        <td>2º Ano</td>
-                                    </tr>
-                                </tbody>    
-                            </Table>
+                        <Col className="col-sm-12">
+                            <Badge id="badgeConteudo">Conteúdo</Badge>
                         </Col>
                     </Row>
+                    <br />
+                    <Row>
+                        <Col className="col-md-3">
+                            <label className="title">Série: 1ºAno</label>
+                        </Col>
+                        <Col className="col-md-3">
+                            <label className="title">Trimestre: 2ºTrimestre</label>
+                        </Col>
+                        <Col className="col-md-3">
+                            <label className="title">Matéria: Python</label>
+                        </Col>
+                        <Col className="col-md-3">
+                            <label className="title">Autor: João Lira</label>
+                        </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Col className="col-sm-12">
+                            <p>João é um programador, e deve fazer uma API. Mas o cliente não manda o endpoint
+                            correto, o que ele pode fazer?</p>
+                        </Col>
+                        <Col className="col-sm-12">
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio1" />{' '}
+                                    A) Geralmente,
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio2" />{' '}
+                                    B) É aí
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio3" />{' '}
+                                    C) Que
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio4" />{' '}
+                                    D) Ele
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio5" />{' '}
+                                    E) Toma!
+                                </label>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
+                    <Row>
+                        <Col className="col-md-3">
+                            <label className="title">Série: 2ºAno</label>
+                        </Col>
+                        <Col className="col-md-3">
+                            <label className="title">Trimestre: 3ºTrimestre</label>
+                        </Col>
+                        <Col className="col-md-3">
+                            <label className="title">Matéria: Java</label>
+                        </Col>
+                        <Col className="col-md-3">
+                            <label className="title">Autor: Nicolly Rocha</label>
+                        </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Col className="col-sm-12">
+                            <p>Nicolly, uma desenvolvedora de jogos eletroeletrônicos, necessita de um ambiente Java para
+                            programar seu jogo eletroeletrônico, mas ela não tem noção de como programar aldo em Java.
+                            O que pode ela, menina Nicolly, fazer?</p>
+                        </Col>
+                        <Col className="col-sm-12">
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio1" />{' '}
+                                    A) Geralmente,
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio2" />{' '}
+                                    B) É aí
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio3" />{' '}
+                                    C) Que
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio4" />{' '}
+                                    D) Ela
+                                </label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <label>
+                                    <Input type="radio" name="radio5" />{' '}
+                                    E) Toma!
+                                </label>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <br />
+                    <br />
                     </Container>
+                    <Footer />
                 </FadeIn>
+                
             </div>
 
     );

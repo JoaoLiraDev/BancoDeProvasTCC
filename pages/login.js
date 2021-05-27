@@ -116,8 +116,8 @@ function Login(props) {
                                     <Input className="form-control" type="text" placeholder="Username:" className="mr-sm-2" />
                                     <Input className="form-control" type="password" placeholder="Password:" className="mr-sm-2" />
                                     <div className="group">
-                                    <a href="/" className="btn btnAnimado" id="btnLogin">Login</a>
-                                    <a href="/recuperar" id="redefinir" >Esqueceu sua senha?</a>
+                                        <a href="/" className="btn btnAnimado" id="btnLogin">Login</a>
+                                        <a href="/recuperar" id="redefinir" >Esqueceu sua senha?</a>
                                     </div>
                                 </FormGroup>
                             </Form>
@@ -164,6 +164,7 @@ function Login(props) {
 
 
             </Container>
+            <Footer />
         </div>
     );
 

@@ -1,7 +1,8 @@
 import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Jumbotron, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Fade } from 'reactstrap';
+import Footer from '../components/footer';
+import { Button, ButtonGroup, Jumbotron, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Fade, Toast, ToastBody, ToastHeader } from 'reactstrap';
 
 
 function Config(props) {
@@ -16,8 +17,8 @@ function Config(props) {
   return (
     <div>
       <Menu />
-          <style>
-            {`
+      <style>
+        {`
               .main{
                 margin-top:100px;
               }
@@ -81,57 +82,92 @@ function Config(props) {
                 margin-left:25rem !important; 
               }
             `}
-          </style>
+      </style>
 
-          <div>
-            <Jumbotron fluid className="descr-top">
-              <Container className="text-center">
-                <img src="profile.png" width="256px" height="256px" alt="img profile"/>
-                  <h1 className="display-4">Profile</h1>
-                  <p className="lead">Username</p>
-                  <p className="lead">Email@example.com.br</p>
-              </Container>
-              <Container className="form_meio">                   
-                  <Form>
-                  <Row>
-                    <Col className="col-md-4">
-                        <FormGroup controlId="formGroupEmail">
-                          <Label>Email address</Label>
-                          <Input type="email" placeholder="Enter email" />
-                        </FormGroup>
-                    </Col>
-                    <Col className="col-md-4">
-                        <FormGroup controlId="formGroupPassword">
-                          <Label>Password</Label>
-                          <Input type="password" placeholder="Password" />
-                        </FormGroup>
-                    </Col>
-                    <Col className="col-md-4">
-                        <FormGroup controlId="formGroupPhone">
-                          <Label>Phone number</Label>
-                          <Input type="phone" placeholder="Your number" />
-                        </FormGroup>
-                    </Col>
-                  </Row>
-                  </Form>
-                    <button className="btn btnAnimado">Confirm Email</button>  
-                    <button className="btn btnAnimado" onClick={toggle}>{buttonLabel}Delete Account</button>
-                      <Modal isOpen={modal} toggle={toggle} className={className} >
-                        <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
-                          <ModalBody>
-                            Are you sure you want to delete your account?
-                            In a few days it will expire and you will no longer have access!
-                          </ModalBody>
-                        <ModalFooter>
-                          <Button color="primary" onClick={toggle}>Yes, I'm sure!</Button>{' '}
-                          <Button color="secondary" onClick={toggle}>No, wrong button...</Button>
-                        </ModalFooter>
-                      </Modal>
-                    <button className="btn btnAnimado">Submit</button>
-              </Container>
-            </Jumbotron>
-           </div>            
-    </div>
-  );  
+      <div>
+        <Jumbotron fluid className="descr-top">
+          <Container className="text-center">
+            <img src="profile.png" width="256px" height="256px" alt="img profile" />
+            <h1 className="display-3">Profile</h1>
+            <p className="lead">Username</p>
+            <p className="lead">Email@example.com.br</p>
+          </Container>
+          <Container className="form_meio">
+            <h4 className="display-4">Edit Profile</h4>
+            <hr />
+            <Form>
+              <Row>
+                <Col className="col-md-4">
+                  <FormGroup controlId="formGroupEmail">
+                    <Label>Email address</Label>
+                    <Input type="email" placeholder="Enter email" />
+                  </FormGroup>
+                </Col>
+                <Col className="col-md-4">
+                  <FormGroup controlId="formGroupPassword">
+                    <Label>Password</Label>
+                    <Input type="password" placeholder="Password" />
+                  </FormGroup>
+                </Col>
+                <Col className="col-md-4">
+                  <FormGroup controlId="formGroupPassword">
+                    <Label>Confirm Password</Label>
+                    <Input type="password" placeholder="Password" />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <button className="btn btnAnimado">Submit</button>
+                <button className="btn btnAnimado">Confirm Email</button>
+              </Row>
+            </Form>
+          </Container>
+          <br />
+          <Container className="form_meio">
+            <h3>More</h3>
+            <hr />
+            <Form>
+              <p className="lead">Email@example.com.br</p>
+              <Row>
+                <FormGroup check>
+                  <Label check className="ml-3">
+                    <Input type="checkbox" /> Check me out
+                  </Label>
+                </FormGroup>
+              </Row>
+              <br />
+              <p className="lead">Email@example.com.br</p>
+              <Row>
+                <FormGroup check>
+                  <Label check className="ml-3">
+                    <Input type="checkbox" /> Check me out
+                  </Label>
+                </FormGroup>
+              </Row>
+              <br />
+              <Row>
+                <button className="btn btnAnimado">Add Account</button>
+                <Col className="col-sm-2">
+                <Input type="button" className="btn btnAnimado" value="Delete Account" onClick={toggle}><{buttonLabel}></Input>
+                </Col>
+                <Modal isOpen={modal} toggle={toggle} className={className}>
+                  <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
+                  <ModalBody>
+                    Are you sure you want to delete your account?
+                    In a few days it will expire and you will no longer have access!
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={toggle}>Yes, I'm sure!</Button>{' '}
+                    <Button color="secondary" onClick={toggle}>No, wrong button...</Button>
+                  </ModalFooter>
+                </Modal>
+              </Row>
+            </Form>
+          </Container>
+        </Jumbotron>
+      </div>
+      <Footer />
+    </div >
+  );
 };
 export default Config;

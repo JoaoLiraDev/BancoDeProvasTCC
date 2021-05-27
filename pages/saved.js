@@ -1,19 +1,20 @@
 import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup,Button, Container, Jumbotron } from 'reactstrap';
+import Footer from '../components/footer';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row } from 'reactstrap';
 
 
 const Config = (props) => {
-    const {
+  const {
     buttonLabel,
     className
-    } = props;
-    return (
-      <div>
-        <Menu />
-        <style>
-            {`
+  } = props;
+  return (
+    <div>
+      <Menu />
+      <style>
+        {`
               .main{
                 margin-top:100px;
               }
@@ -77,25 +78,116 @@ const Config = (props) => {
                 margin-left:25rem !important; 
               }
             `}
-          </style>
-        <Jumbotron fluid className="descr-top">
+      </style>
+      <Jumbotron fluid className="descr-top">
+        <h1 className="display-3 ml-4">Biblioteca</h1>
+        <hr />
         <Container className="text-center">
-            <div>
-            <CardGroup>
+          <div>
+            <Row>
+              <Col className="col-md-4">
                 <Card>
-                <CardTitle tag="h5">Card title</CardTitle>
-                    <CardBody>
-                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                        <button className="btn btnAnimado">Confirm Email</button>
-                    </CardBody>
+                  <CardTitle tag="h5">Português</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
                 </Card>
-            </CardGroup>
-            </div>
+              </Col>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Matemática</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Biologia</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Inglês</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Filosofia</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Educação Fícica</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Sociologia</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Física</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col className="col-md-4">
+                <Card>
+                  <CardTitle tag="h5">Química</CardTitle>
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <button className="btn btnAnimado">Check out</button>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </div>
         </Container>
-        </Jumbotron>
-      </div>
-    );
-  };
-  
-  export default Config;
+      </Jumbotron>
+      <Footer />
+    </div>
+  );
+};
+
+export default Config;
