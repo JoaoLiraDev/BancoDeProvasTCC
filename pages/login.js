@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import Head from 'next/head';
 import {
+    Collapse,
     Navbar,
+    NavbarToggler,
     NavbarBrand,
     Nav,
     NavItem,
@@ -10,18 +12,72 @@ import {
     FormGroup,
     Input,
     Form,
+    Button,
     Row,
     Col,
-    Label
+    Label,
+    Alert
 } from 'reactstrap';
+import { useForm } from 'react-hook-form'
 
 
 
-function Login(props) {
-    const [isOpen, setIsOpen] = useState(false);
+function Login() {
 
-    const toggle = () => setIsOpen(!isOpen);
+    const [login, setLogin] = useState({        
+        email: "",
+        senha: ""
+    });
+    
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const [response, setRespose] = useState({
+        formSave: false,
+        type: '',
+        message: ''
+    });
+
+    const onChangeInput = e => setLogin({ ...login, [e.target.name]: e.target.value });
+    
+    const sendLogin = async e => {
+        // e.preventDefault();
+    
+        setRespose({ formSave: true });
+        
+    
+        try {
+          const res = await fetch('http://localhost:8080/Usuarios/login', {
+            method: 'POST',
+            body: JSON.stringify(login),
+            headers: { 'Content-Type': 'application/json' }
+          });
+    
+          const responseEnv = await res.json();
+          
+          if (responseEnv.error) {
+            setRespose({
+              formSave: false,
+              type: 'error',
+              message: responseEnv.mensagem,
+              token: responseEnv.token
+            });
+          } else {
+            setRespose({
+              formSave: false,
+              type: 'success',
+              message: responseEnv.mensagem,
+              token: responseEnv.token
+            });
+          }
+        } catch (err) {
+          setRespose({
+            formSave: false,
+            type: 'error',
+            message: "Erro: Falha ao realizar login!"
+          });
+        }
+    
+      };
     return (
         <div>
             <Head>
@@ -34,11 +90,14 @@ function Login(props) {
                 {`.menu-custom{
                     background-color:#000;
                 }
-                .btn{
+                .imgLogin{
+                    margin-top:100px;
+                }.btn{
                     text-decoration: none;
                     text-transform: uppercase;
                     font-size: 11px;
                     font-weight: bold;
+                    color:#fff;
                     margin: 0 15px;
                     padding: 10px 15px;
                     overflow: hidden;
@@ -55,18 +114,21 @@ function Login(props) {
                   transform: translate(-50%, -50%);
                   width: 100%;
                   height: 100%;
+                  color:#fff !important;
                   background-color: #E96C64;
-                  z-index: -1;     
+                  
+                  z-index: -1;
+                  
                   transition: 0.7s ease;
                 }
                 .btnAnimado{
-                    color:#E96C64 ;
+                    color:#fff !important;
                     
                 }.btnAnimado:before{
                   content:'';
                     width: 0;
                   height: 100%;
-
+                  color:#fff !important;
                 }.btnAnimado:hover:before{
                     width: 100%;
                     color:#fff !important;
@@ -82,25 +144,23 @@ function Login(props) {
                     display: inline;    
                     width:50%;
                     float:left;
-                    margin-top:80px;
                 }
                 .divMain2{
                     display: inline;
                     width:50%;
                     float:right;
-                    margin-top:180px;
+                    margin-top:100px;
                 }
-                #redefinir{
-                    text-decoration: none;
-                    color: #fff;
-                    font-size:10px;
-                }
+                .alert-hidden {
+                    opacity: 0;
+                    transition: all 250ms linear 2s;
+                  }
                 `}
             </style>
 
             <Navbar className="menu-custom" dark expand="md" fixed="top">
                 <Container>
-                    <NavbarBrand>
+                    <NavbarBrand href="/login">
                         <Image
                             src="/shortLogo.png"
                             alt="Picture of the author"
@@ -109,16 +169,19 @@ function Login(props) {
                         />
                     </NavbarBrand>
 
+
+                    <NavbarToggler />
+                    <Collapse navbar>
+
+                    </Collapse>
+
                     <Nav>
                         <NavItem>
-                            <Form inline>
+                            <Form inline onSubmit={handleSubmit(sendLogin)} noValidate>
                                 <FormGroup>
-                                    <Input className="form-control" type="text" placeholder="Username:" className="mr-sm-2" />
-                                    <Input className="form-control" type="password" placeholder="Password:" className="mr-sm-2" />
-                                    <div className="group">
-                                        <a href="/" className="btn btnAnimado" id="btnLogin">Login</a>
-                                        <a href="/recuperar" id="redefinir" >Esqueceu sua senha?</a>
-                                    </div>
+                                    <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", {required: 'Enter your e-mail',pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i , message: 'Enter a valid e-mail address',}})} placeholder="Email:"  onChange={onChangeInput}/>
+                                    <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" placeholder="Password:"  onChange={onChangeInput}/>
+                                    <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
                                 </FormGroup>
                             </Form>
                         </NavItem>
@@ -128,6 +191,9 @@ function Login(props) {
 
 
             <Container className="imgLogin">
+                    {/* {...setTimeout(() => {{ errors.email && <Alert color="danger">{errors.email.message}</Alert>}}, 2500)} */}
+                    {errors.email && <Alert color="danger">{errors.email.message}</Alert>}
+             
                 <div className="divMain1">
                     <Image src="/teaching.svg" alt="ImagemLogin" width={600} height={600} />
                 </div>
@@ -164,7 +230,6 @@ function Login(props) {
 
 
             </Container>
-            <Footer />
         </div>
     );
 

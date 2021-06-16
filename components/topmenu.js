@@ -79,12 +79,7 @@ const Menu = (props) => {
                                         </DropdownItem>
                                         <DropdownItem>
                                             <NavItem>
-                                                <a href="/" className="textcolor">Notifications <Badge color="secondary">9</Badge></a>
-                                            </NavItem>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavItem>
-                                                <a href="/" className="textcolor">Reminders</a>
+                                                <a href="/notifications" className="textcolor">Notifications <Badge color="secondary">9</Badge></a>
                                             </NavItem>
                                         </DropdownItem>
                                         <DropdownItem>

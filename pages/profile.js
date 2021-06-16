@@ -2,17 +2,31 @@ import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
 import Footer from '../components/footer';
-import { Button, ButtonGroup, Jumbotron, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Fade, Toast, ToastBody, ToastHeader } from 'reactstrap';
+import { Button, 
+         ButtonGroup, 
+         Jumbotron, 
+         Form, 
+         FormGroup, 
+         Label, 
+         Input, 
+         Modal, 
+         ModalHeader, 
+         ModalBody, 
+         ModalFooter, 
+         Container, 
+         Row,
+         Col, 
+         Toast, 
+         ToastBody, 
+         ToastHeader,
+         Media,
+        Card } from 'reactstrap';
 
 
 function Config(props) {
-  const {
-    buttonLabel,
-    className
-  } = props;
 
+  const {buttonLabel,className} = props;
   const [modal, setModal] = useState(false);
-  const [fadeIn, setFadeIn] = useState(true);
   const toggle = () => setModal(!modal);
   return (
     <div>
@@ -81,13 +95,17 @@ function Config(props) {
               .form_meio{
                 margin-left:25rem !important; 
               }
+              #profile{
+                border-radius: 50% !important;
+                margin-right: 1rem !important;
+              }
             `}
       </style>
 
       <div>
         <Jumbotron fluid className="descr-top">
           <Container className="text-center">
-            <img src="profile.png" width="256px" height="256px" alt="img profile" />
+            <img src="profile.png"   width="256px" height="256px" alt="img profile" />
             <h1 className="display-3">Profile</h1>
             <p className="lead">Username</p>
             <p className="lead">Email@example.com.br</p>
@@ -97,19 +115,23 @@ function Config(props) {
             <hr />
             <Form>
               <Row>
-                <Col className="col-md-4">
+                <Col className="col-md-6">
                   <FormGroup controlId="formGroupEmail">
                     <Label>Email address</Label>
                     <Input type="email" placeholder="Enter email" />
                   </FormGroup>
                 </Col>
-                <Col className="col-md-4">
+                </Row>
+                <Row>
+                <Col className="col-md-6">
                   <FormGroup controlId="formGroupPassword">
                     <Label>Password</Label>
                     <Input type="password" placeholder="Password" />
                   </FormGroup>
                 </Col>
-                <Col className="col-md-4">
+                </Row>
+                <Row>
+                <Col className="col-md-6">
                   <FormGroup controlId="formGroupPassword">
                     <Label>Confirm Password</Label>
                     <Input type="password" placeholder="Password" />
@@ -127,38 +149,76 @@ function Config(props) {
             <h3>More</h3>
             <hr />
             <Form>
-              <p className="lead">Email@example.com.br</p>
               <Row>
+              <Col sm="4">
+              <Card body>
+                <Media>
+                  <Media left top href="#">
+                  <img
+                    src="/iconMale.jpeg"
+                    alt="Profile pic"
+                    width={64}
+                    height={64}
+                    id="profile"
+                  />
+                  </Media>
+                  <Media body>
+                  <Media heading>
+                    Username
+                  </Media>
+                    Email@example.com.br
+                  </Media>
+                </Media>
                 <FormGroup check>
                   <Label check className="ml-3">
                     <Input type="checkbox" /> Check me out
                   </Label>
                 </FormGroup>
+              </Card>
+              </Col>
               </Row>
               <br />
-              <p className="lead">Email@example.com.br</p>
               <Row>
+              <Col sm="4">
+              <Card body>
+                <Media>
+                  <Media left top href="#">
+                  <img
+                    src="/iconFemale.jpeg"
+                    alt="Profile pic"
+                    width={64}
+                    height={64}
+                    id="profile"
+                  />
+                  </Media>
+                  <Media body>
+                  <Media heading>
+                    Username
+                  </Media>
+                    Email@example.com.br
+                  </Media>
+                </Media>
                 <FormGroup check>
                   <Label check className="ml-3">
                     <Input type="checkbox" /> Check me out
                   </Label>
                 </FormGroup>
+              </Card>
+              </Col>
               </Row>
               <br />
               <Row>
                 <button className="btn btnAnimado">Add Account</button>
-                <Col className="col-sm-2">
-                <Input type="button" className="btn btnAnimado" value="Delete Account" onClick={toggle}><{buttonLabel}></Input>
-                </Col>
+                <button className="btn btnAnimado" onClick={toggle}>Delete Account</button>
                 <Modal isOpen={modal} toggle={toggle} className={className}>
                   <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
                   <ModalBody>
-                    Are you sure you want to delete your account?
-                    In a few days it will expire and you will no longer have access!
+                  Are you sure you want to delete your account?
+                  In a few days it will expire and you will no longer have access!
                   </ModalBody>
                   <ModalFooter>
-                    <Button color="primary" onClick={toggle}>Yes, I'm sure!</Button>{' '}
-                    <Button color="secondary" onClick={toggle}>No, wrong button...</Button>
+                    <button className="btn" onClick={toggle}>Yes, I'm sure!</button>{' '}
+                    <button className="btn" onClick={toggle}>No, wrong button...</button>
                   </ModalFooter>
                 </Modal>
               </Row>

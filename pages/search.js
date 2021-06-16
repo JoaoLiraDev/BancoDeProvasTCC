@@ -1,5 +1,4 @@
 import Menu from '../components/topmenu';
-import Carocel from '../components/carousel';
 import Footer from '../components/footer';
 import React,{useState} from 'react';
 import Head from 'next/head';
@@ -240,7 +239,7 @@ function webSearch() {
                     <Row>
                         <Col className="col-sm-12">
                             <p>Nicolly, uma desenvolvedora de jogos eletroeletrônicos, necessita de um ambiente Java para
-                            programar seu jogo eletroeletrônico, mas ela não tem noção de como programar aldo em Java.
+                            programar seu jogo eletroeletrônico, mas ela não tem noção de como programar algo em Java.
                             O que pode ela, menina Nicolly, fazer?</p>
                         </Col>
                         <Col className="col-sm-12">

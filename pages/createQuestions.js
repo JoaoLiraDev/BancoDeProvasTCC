@@ -1,11 +1,76 @@
 import Menu from "../components/topmenu";
 import Smallfooter from "../components/smallfooter";
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
-import { Form, FormGroup, Label, Input, Container, Row, Col,} from 'reactstrap';
+import { Form, FormGroup, Label, Input, Container, Row, Col, Button, Alert} from 'reactstrap';
+import { data, readyException } from "jquery";
+import { useForm } from 'react-hook-form'
+
 
 
 function createQuestion() {
+
+    
+
+    const [quest, setQuest] = useState({
+        ano: '',
+        trimestre: '',
+        materia: '',
+        autor: '',
+        conteudo: '',
+        descricao: ''
+    });
+
+    const [response, setRespose] = useState({
+        formSave: false,
+        type: '',
+        message: ''
+    });
+   
+    const onChangeInput = e => setQuest({ ...quest, [e.target.name]: e.target.value });
+    
+    const { register, handleSubmit, errors } = useForm();
+
+    const sendQuest = async e => {
+       
+    
+        setRespose({ formSave: true });
+    
+        try {
+          const res = await fetch('http://localhost:8080/CreateQuest/cadastroQuest', {
+            method: 'POST',
+            body: JSON.stringify(quest),
+            headers: { 'Content-Type': 'application/json' }
+          });
+    
+          const responseEnv = await res.json();
+          
+
+          if (responseEnv.error) {
+            setRespose({
+              formSave: false,
+              type: 'error',
+              message: responseEnv.mensagem
+            });
+          } else {
+            setRespose({
+              formSave: false,
+              type: 'success',
+              message: responseEnv.mensagem
+            });
+          }
+        } catch (err) {
+          setRespose({
+            formSave: false,
+            type: 'error',
+            message: "Erro: Falha ao cadastrar questão!"
+          });
+        }
+    
+        
+      };
+      
+    
     return (
         <div>
             <Head>
@@ -14,7 +79,7 @@ function createQuestion() {
                 </title>
             </Head>
             <Menu/>
-
+            
             <Container>
                 <style>
                     {`
@@ -67,11 +132,17 @@ function createQuestion() {
                     }
                     `}
                 </style>
-            <Form className="form">
+
+            
+            <Form className="form" onSubmit={handleSubmit(sendQuest)} noValidate>
+
+            {response.type === 'error' ? <Alert color="danger">{response.message}</Alert> : ""}
+            {response.type === 'success' ? <Alert color="success">{response.message}</Alert> : ""}
+
                 <Row>
                 <Col className="col-md-4">
                     <FormGroup>
-                        <Input type="select" name="serie" id="serie">
+                        <Input type="select" name="ano" id="ano" onChange={onChangeInput}>
                             <option>Selecione um ano</option>
                             <option>1ºAno</option>
                             <option>2ºAno</option>
@@ -81,7 +152,7 @@ function createQuestion() {
                 </Col>
                 <Col className="col-md-4">
                     <FormGroup>
-                        <Input type="select" name="trimestre" id="trimestre">
+                        <Input type="select" name="trimestre" id="trimestre" onChange={onChangeInput}>
                             <option>Selecione um Trimestre</option>
                             <option>1° Trimestre</option>
                             <option>2° Trimestre</option>
@@ -91,7 +162,7 @@ function createQuestion() {
                 </Col>
                 <Col className="col-md-4">
                     <FormGroup>
-                        <Input type="select" name="materia" id="materia">
+                        <Input type="select" name="materia" id="materia" onChange={onChangeInput}>
                             <option>Selecione uma Materia</option>
                             <option>Lingua Portuguesa e Literatura</option>
                             <option>Matematica</option>
@@ -115,21 +186,23 @@ function createQuestion() {
             </Row>
                 <FormGroup>
                     <Label for="autor">Autor:</Label>
-                    <Input type="text" name="autor" id="autor" placeholder="Nome Autor:" />
+                    <Input type="text" name="autor" id="autor" placeholder="Nome Autor:" onChange={onChangeInput}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="autor">Conteúdo:</Label>
-                    <Input type="text" name="conteudo" id="conteudo" placeholder="Conteudo da Questão:" />
+                    <Input type="text" name="conteudo" id="conteudo" placeholder="Conteudo da Questão:"   onChange={onChangeInput}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="descricao">Descrição:</Label>
-                    <Input type="textarea" name="descricao" id="descricao" />
+                    <Input type="textarea" name="descricao" id="descricao" {...register('descricao', {required: 'Enter your description'})} onChange={onChangeInput} />
+                    {errors && <p className="error">{errors.descricao.message}</p>}
                 </FormGroup>
                 <Row>
                     <Col className="col-md-4 ">
-                        <button type="submit" className="btn btnAnimado" >Cadastrar Questão</button>
+                        
+                        {response.formSave ? <Button type="submit" outline color="danger" disabled>Enviando...</Button>: <Button type="submit" outline color="danger">Cadastrar Questão</Button>}
                     </Col>
                 </Row>
             </Form>
@@ -137,6 +210,14 @@ function createQuestion() {
            <Smallfooter/>
         </div>
     );
+};
+
+export async function getServerSideProps(context){
+
+    const response = await fetch(`http://localhost:8080/CreateQuest/all`)
+    const data = await response.json()
+
+    return { props: { data } };
 };
 
 export default createQuestion
