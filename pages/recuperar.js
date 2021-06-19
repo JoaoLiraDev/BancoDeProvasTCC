@@ -14,7 +14,7 @@ import {
     Col,
     Label
 } from 'reactstrap';
-
+import { parseCookies } from 'nookies'
 
 
 function Recuperar(props) {
@@ -164,3 +164,21 @@ function Recuperar(props) {
 
 };
 export default Recuperar;
+
+export async function getServerSideProps(ctx){
+    
+    const { MQtoken } = parseCookies(ctx)
+
+    if(!MQtoken){
+        return{
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            }
+        }
+    }
+
+    return{
+       props: {} 
+    }
+}

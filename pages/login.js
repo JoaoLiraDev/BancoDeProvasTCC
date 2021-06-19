@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image'
 import Head from 'next/head';
 import {
@@ -19,6 +19,7 @@ import {
     Alert
 } from 'reactstrap';
 import { useForm } from 'react-hook-form'
+import { AuthContext } from '../contexts/AuthContext';
 
 
 
@@ -39,45 +40,11 @@ function Login() {
 
     const onChangeInput = e => setLogin({ ...login, [e.target.name]: e.target.value });
     
-    const sendLogin = async e => {
-        // e.preventDefault();
+    const {singIn} = useContext(AuthContext)
+    async function sendLogin(login){
+        await singIn(login)
+    }
     
-        setRespose({ formSave: true });
-        
-    
-        try {
-          const res = await fetch('http://localhost:8080/Usuarios/login', {
-            method: 'POST',
-            body: JSON.stringify(login),
-            headers: { 'Content-Type': 'application/json' }
-          });
-    
-          const responseEnv = await res.json();
-          
-          if (responseEnv.error) {
-            setRespose({
-              formSave: false,
-              type: 'error',
-              message: responseEnv.mensagem,
-              token: responseEnv.token
-            });
-          } else {
-            setRespose({
-              formSave: false,
-              type: 'success',
-              message: responseEnv.mensagem,
-              token: responseEnv.token
-            });
-          }
-        } catch (err) {
-          setRespose({
-            formSave: false,
-            type: 'error',
-            message: "Erro: Falha ao realizar login!"
-          });
-        }
-    
-      };
     return (
         <div>
             <Head>
@@ -92,18 +59,17 @@ function Login() {
                 }
                 .imgLogin{
                     margin-top:100px;
-                }.btn{
+                }
+                .btn{
                     text-decoration: none;
                     text-transform: uppercase;
                     font-size: 11px;
                     font-weight: bold;
-                    color:#fff;
                     margin: 0 15px;
                     padding: 10px 15px;
                     overflow: hidden;
                     border: 2px solid #E96C64;
                     position: relative;
-                    
                     
                 }
                 .btn:before{
@@ -114,7 +80,7 @@ function Login() {
                   transform: translate(-50%, -50%);
                   width: 100%;
                   height: 100%;
-                  color:#fff !important;
+                  color:#E96C64 ;
                   background-color: #E96C64;
                   
                   z-index: -1;
@@ -122,20 +88,21 @@ function Login() {
                   transition: 0.7s ease;
                 }
                 .btnAnimado{
-                    color:#fff !important;
+                    
                     
                 }.btnAnimado:before{
                   content:'';
                     width: 0;
                   height: 100%;
                   color:#fff !important;
+
                 }.btnAnimado:hover:before{
                     width: 100%;
                     color:#fff !important;
-                  
                 }
                 #btnLogin{
                     width: 100px;
+                    color: #fff !important;
                 }
                 #btnCadastrar{
                     width: 150px;
@@ -157,6 +124,7 @@ function Login() {
                   }
                 `}
             </style>
+            
 
             <Navbar className="menu-custom" dark expand="md" fixed="top">
                 <Container>
@@ -180,7 +148,7 @@ function Login() {
                             <Form inline onSubmit={handleSubmit(sendLogin)} noValidate>
                                 <FormGroup>
                                     <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", {required: 'Enter your e-mail',pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i , message: 'Enter a valid e-mail address',}})} placeholder="Email:"  onChange={onChangeInput}/>
-                                    <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" placeholder="Password:"  onChange={onChangeInput}/>
+                                    <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", {required: 'Enter your password'})} placeholder="Password:"  onChange={onChangeInput}/>
                                     <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
                                 </FormGroup>
                             </Form>
@@ -191,8 +159,8 @@ function Login() {
 
 
             <Container className="imgLogin">
-                    {/* {...setTimeout(() => {{ errors.email && <Alert color="danger">{errors.email.message}</Alert>}}, 2500)} */}
                     {errors.email && <Alert color="danger">{errors.email.message}</Alert>}
+                    {errors.senha && <Alert color="danger">{errors.senha.message}</Alert>}
              
                 <div className="divMain1">
                     <Image src="/teaching.svg" alt="ImagemLogin" width={600} height={600} />

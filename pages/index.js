@@ -1,18 +1,24 @@
 import Menu from '../components/topmenu';
 import Carocel from '../components/carousel';
 import Footer from '../components/footer';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
-
+import GetServerSideProps from 'next';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row } from 'reactstrap';
-
-
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { api } from '../services/api';
+import { parseCookies } from 'nookies'
+import { getAPIClient } from '../services/axios';
+
 library.add(fas)
 
 function HomePage() {
+
+    // useEffect(()=>{
+    //   api.get('/CreateQuest/all');
+    // }, [])
+
     return (
         <div>
             <Head>
@@ -209,3 +215,20 @@ function HomePage() {
 };
 
 export default HomePage;
+
+export async function getServerSideProps(ctx){
+    
+    const { MQtoken } = parseCookies(ctx)
+
+    if(!MQtoken){
+        return{
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            }
+        }
+    }
+    return{
+       props: {} 
+    }
+}

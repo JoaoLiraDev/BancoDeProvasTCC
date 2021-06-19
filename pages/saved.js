@@ -2,6 +2,7 @@ import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
 import Footer from '../components/footer';
+import { parseCookies } from 'nookies'
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row } from 'reactstrap';
 
 
@@ -190,4 +191,22 @@ const Config = (props) => {
   );
 };
 
-export default Config;
+export default Config_saved;
+
+export async function getServerSideProps(ctx){
+    
+  const { MQtoken } = parseCookies(ctx)
+
+  if(!MQtoken){
+      return{
+          redirect: {
+              destination: '/login',
+              permanent: false,
+          }
+      }
+  }
+
+  return{
+     props: {} 
+  }
+}

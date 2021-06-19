@@ -18,7 +18,7 @@ import {
     Card,
     Table
 } from 'reactstrap';
-
+import { parseCookies } from 'nookies'
 
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -121,3 +121,21 @@ function webQuestions() {
     
 }
 export default webQuestions;
+
+export async function getServerSideProps(ctx){
+    
+    const { MQtoken } = parseCookies(ctx)
+
+    if(!MQtoken){
+        return{
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            }
+        }
+    }
+
+    return{
+       props: {} 
+    }
+}

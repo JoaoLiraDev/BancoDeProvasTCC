@@ -5,13 +5,13 @@ import Head from "next/head";
 import { Form, FormGroup, Label, Input, Container, Row, Col, Button, Alert} from 'reactstrap';
 import { data, readyException } from "jquery";
 import { useForm } from 'react-hook-form'
-
+import { parseCookies } from 'nookies'
+import GetServerSideProps from 'next';
+import { api } from '../services/api';
+import { getAPIClient } from "../services/axios";
 
 
 function createQuestion() {
-
-    
-
     const [quest, setQuest] = useState({
         ano: '',
         trimestre: '',
@@ -20,53 +20,51 @@ function createQuestion() {
         conteudo: '',
         descricao: ''
     });
-
-    const [response, setRespose] = useState({
+    
+    const [response, setResponse] = useState({
         formSave: false,
         type: '',
         message: ''
     });
    
     const onChangeInput = e => setQuest({ ...quest, [e.target.name]: e.target.value });
-    
-    const { register, handleSubmit, errors } = useForm();
-
+   
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { 'MQtoken': token } = parseCookies();
     const sendQuest = async e => {
        
-    
-        setRespose({ formSave: true });
+        setResponse({ formSave: true });
     
         try {
           const res = await fetch('http://localhost:8080/CreateQuest/cadastroQuest', {
             method: 'POST',
             body: JSON.stringify(quest),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
           });
     
           const responseEnv = await res.json();
           
 
           if (responseEnv.error) {
-            setRespose({
+            setResponse({
               formSave: false,
               type: 'error',
               message: responseEnv.mensagem
             });
           } else {
-            setRespose({
+            setResponse({
               formSave: false,
               type: 'success',
-              message: responseEnv.mensagem
+              message: responseEnv.menasgem
             });
           }
         } catch (err) {
-          setRespose({
+          setResponse({
             formSave: false,
             type: 'error',
             message: "Erro: Falha ao cadastrar questão!"
           });
         }
-    
         
       };
       
@@ -142,7 +140,7 @@ function createQuestion() {
                 <Row>
                 <Col className="col-md-4">
                     <FormGroup>
-                        <Input type="select" name="ano" id="ano" onChange={onChangeInput}>
+                        <Input type="select" name="ano" id="ano" {...register("ano", {required: 'Select a year'})} onChange={onChangeInput}>
                             <option>Selecione um ano</option>
                             <option>1ºAno</option>
                             <option>2ºAno</option>
@@ -152,7 +150,7 @@ function createQuestion() {
                 </Col>
                 <Col className="col-md-4">
                     <FormGroup>
-                        <Input type="select" name="trimestre" id="trimestre" onChange={onChangeInput}>
+                        <Input type="select" name="trimestre" id="trimestre" {...register("trimestre", {required: 'Select a quarter'})} onChange={onChangeInput}>
                             <option>Selecione um Trimestre</option>
                             <option>1° Trimestre</option>
                             <option>2° Trimestre</option>
@@ -162,7 +160,7 @@ function createQuestion() {
                 </Col>
                 <Col className="col-md-4">
                     <FormGroup>
-                        <Input type="select" name="materia" id="materia" onChange={onChangeInput}>
+                        <Input type="select" name="materia" id="materia" {...register("materia", {required: 'Select a story'})} onChange={onChangeInput}>
                             <option>Selecione uma Materia</option>
                             <option>Lingua Portuguesa e Literatura</option>
                             <option>Matematica</option>
@@ -186,23 +184,22 @@ function createQuestion() {
             </Row>
                 <FormGroup>
                     <Label for="autor">Autor:</Label>
-                    <Input type="text" name="autor" id="autor" placeholder="Nome Autor:" onChange={onChangeInput}/>
+                    <Input type="text" name="autor" id="autor" placeholder="Nome Autor:" {...register("autor", {required: 'Enter an author'})} onChange={onChangeInput}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="autor">Conteúdo:</Label>
-                    <Input type="text" name="conteudo" id="conteudo" placeholder="Conteudo da Questão:"   onChange={onChangeInput}/>
+                    <Input type="text" name="conteudo" id="conteudo" placeholder="Conteudo da Questão:" {...register("conteudo", {required: 'Insert the content'})}   onChange={onChangeInput}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="descricao">Descrição:</Label>
-                    <Input type="textarea" name="descricao" id="descricao" {...register('descricao', {required: 'Enter your description'})} onChange={onChangeInput} />
-                    {errors && <p className="error">{errors.descricao.message}</p>}
+                    <Input type="textarea" name="descricao" id="descricao" {...register("descricao", {required: 'Enter your description'})} onChange={onChangeInput} />
+                   
                 </FormGroup>
                 <Row>
                     <Col className="col-md-4 ">
-                        
-                        {response.formSave ? <Button type="submit" outline color="danger" disabled>Enviando...</Button>: <Button type="submit" outline color="danger">Cadastrar Questão</Button>}
+                        {response.formSave ? <button type="submit" className="btn btnAnimado" id="btnCriar" >Enviando...</button>:<button type="submit" className="btn btnAnimado" id="btnCriar" >Cadastrar Questão</button>}
                     </Col>
                 </Row>
             </Form>
@@ -212,12 +209,21 @@ function createQuestion() {
     );
 };
 
-export async function getServerSideProps(context){
+export default createQuestion;
 
-    const response = await fetch(`http://localhost:8080/CreateQuest/all`)
-    const data = await response.json()
+export async function getServerSideProps(ctx){
+    const APIClient = getAPIClient(ctx)
+    const { MQtoken } = parseCookies(ctx)
 
-    return { props: { data } };
-};
-
-export default createQuestion
+    if(!MQtoken){
+        return{
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            }
+        }
+    }
+    return{
+       props: {} 
+    }
+}

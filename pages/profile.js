@@ -2,6 +2,7 @@ import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
 import Footer from '../components/footer';
+import { parseCookies } from 'nookies'
 import { Button, 
          ButtonGroup, 
          Jumbotron, 
@@ -23,7 +24,7 @@ import { Button,
         Card } from 'reactstrap';
 
 
-function Config(props) {
+function Config_profile(props) {
 
   const {buttonLabel,className} = props;
   const [modal, setModal] = useState(false);
@@ -111,7 +112,7 @@ function Config(props) {
             <p className="lead">Email@example.com.br</p>
           </Container>
           <Container className="form_meio">
-            <h4 className="display-4">Edit Profile</h4>
+            <h4 className="display-4">Edit</h4>
             <hr />
             <Form>
               <Row>
@@ -230,4 +231,23 @@ function Config(props) {
     </div >
   );
 };
-export default Config;
+export default Config_profile;
+
+
+export async function getServerSideProps(ctx){
+    
+  const { MQtoken } = parseCookies(ctx)
+
+  if(!MQtoken){
+      return{
+          redirect: {
+              destination: '/login',
+              permanent: false,
+          }
+      }
+  }
+
+  return{
+     props: {} 
+  }
+}
