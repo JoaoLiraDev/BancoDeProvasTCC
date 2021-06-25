@@ -65,12 +65,11 @@ function Login() {
                     text-transform: uppercase;
                     font-size: 11px;
                     font-weight: bold;
-                    margin: 0 15px 0 140px;
+                    margin: 0 15px;
                     padding: 10px 15px;
                     overflow: hidden;
                     border: 2px solid #E96C64;
                     position: relative;
-                    color: #000 !important;
                     
                 }
                 .btn:before{
@@ -95,15 +94,15 @@ function Login() {
                   content:'';
                     width: 0;
                   height: 100%;
-                  color:#000 !important;
+                  color:#fff !important;
 
                 }.btnAnimado:hover:before{
                     width: 100%;
-                    color:#000 !important;
+                    color:#fff !important;
                 }
                 #btnLogin{
                     width: 100px;
-                    color: #000 !important;
+                    color: #fff !important;
                 }
                 #btnCadastrar{
                     width: 150px;
@@ -118,56 +117,43 @@ function Login() {
                     width:50%;
                     float:right;
                     margin-top:100px;
-                    padding-left: 145px;
                 }
                 .alert-hidden {
                     opacity: 0;
                     transition: all 250ms linear 2s;
                   }
-                  .top{
-                    display: flex;
-                    flex-direction: column;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    justify-content: space-between;
-                  }
-                  .separator{
-                    font-size: 14px;
-                    color: #a8a8b3;
-                    margin: 32px 0;
-                    display: flex;
-                    align-items: center;
-                  }
-                  .separator:before{
-                      content: '';
-                      flex: 1;
-                      height: 1px;
-                      background: #a8a8b3;
-                      margin-right: 16px;
-                    }
-                    .separator:after{
-                      content: '';
-                      flex: 1;
-                      height: 1px;
-                      background: #a8a8b3;
-                      margin-left: 16px;
-                    }
-                
                 `}
             </style>
 
 
             <Navbar className="menu-custom" dark expand="md" fixed="top">
-                <Container className="top">
+                <Container>
+                    <NavbarBrand href="/login">
+                        <Image
+                            src="/shortLogo.png"
+                            alt="Picture of the author"
+                            width={188}
+                            height={55}
+                        />
+                    </NavbarBrand>
 
-                    <Image
-                        src="/shortLogo.png"
-                        alt="Picture of the author"
-                        width={188}
-                        height={55}
 
-                    />
+                    <NavbarToggler />
+                    <Collapse navbar>
 
+                    </Collapse>
+
+                    <Nav>
+                        <NavItem>
+                            <Form inline onSubmit={handleSubmit(sendLogin)} noValidate>
+                                <FormGroup>
+                                    <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", { required: 'Enter your e-mail', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Enter a valid e-mail address', } })} placeholder="Email:" onChange={onChangeInput} />
+                                    <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", { required: 'Enter your password' })} placeholder="Password:" onChange={onChangeInput} />
+                                    <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
+                                </FormGroup>
+                            </Form>
+                        </NavItem>
+                    </Nav>
                 </Container>
             </Navbar>
 
@@ -181,24 +167,6 @@ function Login() {
                 </div>
 
                 <div className="divMain2">
-                    <Form onSubmit={handleSubmit(sendLogin)} noValidate>
-                        <Row>
-                            <Col className="col-md-10">
-                                <Label for="email">Email:</Label>
-                                <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", { required: 'Enter your e-mail', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Enter a valid e-mail address', } })} placeholder="Email:" onChange={onChangeInput} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className="col-md-10">
-                                <Label for="senha">Password:</Label>
-                                <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", { required: 'Enter your password' })} placeholder="Password:" onChange={onChangeInput} />
-                            </Col>
-                        </Row>
-                        <br />
-                        <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
-                        <div className="separator">ou faça seu cadastro agora.</div>
-                    </Form>
-                    {/*                     
                     <Form className="form">
                         <FormGroup>
                             <Label for="autor">Nome Completo:</Label>
@@ -225,7 +193,7 @@ function Login() {
                                 <button type="submit" className="btn btnAnimado" id="btnCadastrar" >Cadastrar-se</button>
                             </Col>
                         </Row>
-                    </Form> */}
+                    </Form>
                 </div>
 
 
