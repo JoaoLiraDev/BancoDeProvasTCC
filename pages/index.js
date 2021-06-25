@@ -4,7 +4,7 @@ import Footer from '../components/footer';
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import GetServerSideProps from 'next';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row } from 'reactstrap';
+import { Button, Container, Jumbotron, Col, Row, Image } from 'reactstrap';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { api } from '../services/api';
@@ -18,6 +18,9 @@ function HomePage() {
     // useEffect(()=>{
     //   api.get('/CreateQuest/all');
     // }, [])
+    const images = {
+        src: "../AboutUs.png",
+    }
 
     return (
         <div>
@@ -95,6 +98,16 @@ function HomePage() {
                   .form_meio{
                     margin-left:25rem !important; 
                   }
+                  h2{
+                    font-weight: bold !important;
+                  }
+                  hr{
+                      border: 3px solid !important;
+                      width: 500px;
+                  }
+                  .containerFlex{
+                      display: flex;
+                  }
                 `}
             </style>
 
@@ -103,108 +116,46 @@ function HomePage() {
                 <hr />
                 <Carocel />
                 <br />
-                <h1 className="display-5 ml-4 text-center">Categories</h1>
-                <br />
-                <Container className="text-center">
+
+                <Container className="containerFlex">
                     <div>
-                        <Row>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Humanas</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Matemática</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Biologia</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Inglês</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Filosofia</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Educação Fícica</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Sociologia</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Física</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col className="col-md-4">
-                                <Card>
-                                    <CardTitle tag="h5">Química</CardTitle>
-                                    <CardBody>
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <button className="btn btnAnimado">Check out</button>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
+                        <img
+                            src="/AboutUs.svg"
+                            alt="Sobre nós"
+                            width={631}
+                            height={431}
+                            id="aboutUs"
+                        />
+                    </div>
+                    <div>
+                        <h2> Sobre Nós </h2>
+                        <p> My Questions foi desenvolvido em prol do trabalho dos professores da rede Fieb, como uma ferramenta
+                            facilitando a criação de provas do jeitinho Fieb.
+                        </p>
+                    </div>
+                </Container>
+                <br />
+                <hr />
+                <br />
+                <Container className="containerFlex">
+                    <div>
+                        <h2>Funcionalidades</h2>
+                        <p>Monte sua prova da forma mais prática:</p>
+                        <ul>
+                            <li>Salve seu estilo de cabeçalho;</li>
+                            <li>Crie o tipo A e B clicando em apenas muito bom;</li>
+                            <li>Salve questões da sua matéria através da nossa feed online;</li>
+                            <li>Crie e salve questões você mesmo!!</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img
+                            src="/Choose.svg"
+                            alt="Sobre nós"
+                            width={631}
+                            height={431}
+                            id="aboutUs"
+                        />
                     </div>
                 </Container>
             </Jumbotron>
@@ -216,19 +167,19 @@ function HomePage() {
 
 export default HomePage;
 
-export async function getServerSideProps(ctx){
-    
+export async function getServerSideProps(ctx) {
+
     const { MQtoken } = parseCookies(ctx)
 
-    if(!MQtoken){
-        return{
+    if (!MQtoken) {
+        return {
             redirect: {
                 destination: '/login',
                 permanent: false,
             }
         }
     }
-    return{
-       props: {} 
+    return {
+        props: {}
     }
 }

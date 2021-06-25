@@ -3,30 +3,32 @@ import Smallfooter from '../components/smallfooter';
 import React, { useState } from 'react';
 import Footer from '../components/footer';
 import { parseCookies } from 'nookies'
-import { Button, 
-         ButtonGroup, 
-         Jumbotron, 
-         Form, 
-         FormGroup, 
-         Label, 
-         Input, 
-         Modal, 
-         ModalHeader, 
-         ModalBody, 
-         ModalFooter, 
-         Container, 
-         Row,
-         Col, 
-         Toast, 
-         ToastBody, 
-         ToastHeader,
-         Media,
-        Card } from 'reactstrap';
+import {
+  Button,
+  ButtonGroup,
+  Jumbotron,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Container,
+  Row,
+  Col,
+  Toast,
+  ToastBody,
+  ToastHeader,
+  Media,
+  Card
+} from 'reactstrap';
 
 
 function Config_profile(props) {
 
-  const {buttonLabel,className} = props;
+  const { buttonLabel, className } = props;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   return (
@@ -106,7 +108,7 @@ function Config_profile(props) {
       <div>
         <Jumbotron fluid className="descr-top">
           <Container className="text-center">
-            <img src="profile.png"   width="256px" height="256px" alt="img profile" />
+            <img src="profile.png" width="256px" height="256px" alt="img profile" />
             <h1 className="display-3">Profile</h1>
             <p className="lead">Username</p>
             <p className="lead">Email@example.com.br</p>
@@ -122,16 +124,16 @@ function Config_profile(props) {
                     <Input type="email" placeholder="Enter email" />
                   </FormGroup>
                 </Col>
-                </Row>
-                <Row>
+              </Row>
+              <Row>
                 <Col className="col-md-6">
                   <FormGroup controlId="formGroupPassword">
                     <Label>Password</Label>
                     <Input type="password" placeholder="Password" />
                   </FormGroup>
                 </Col>
-                </Row>
-                <Row>
+              </Row>
+              <Row>
                 <Col className="col-md-6">
                   <FormGroup controlId="formGroupPassword">
                     <Label>Confirm Password</Label>
@@ -146,85 +148,87 @@ function Config_profile(props) {
             </Form>
           </Container>
           <br />
-          <Container className="form_meio">
-            <h3>More</h3>
-            <hr />
-            <Form>
-              <Row>
-              <Col sm="4">
-              <Card body>
-                <Media>
-                  <Media left top href="#">
-                  <img
-                    src="/iconMale.jpeg"
-                    alt="Profile pic"
-                    width={64}
-                    height={64}
-                    id="profile"
-                  />
-                  </Media>
-                  <Media body>
-                  <Media heading>
-                    Username
-                  </Media>
-                    Email@example.com.br
-                  </Media>
-                </Media>
-                <FormGroup check>
-                  <Label check className="ml-3">
-                    <Input type="checkbox" /> Check me out
-                  </Label>
-                </FormGroup>
-              </Card>
-              </Col>
-              </Row>
-              <br />
-              <Row>
-              <Col sm="4">
-              <Card body>
-                <Media>
-                  <Media left top href="#">
-                  <img
-                    src="/iconFemale.jpeg"
-                    alt="Profile pic"
-                    width={64}
-                    height={64}
-                    id="profile"
-                  />
-                  </Media>
-                  <Media body>
-                  <Media heading>
-                    Username
-                  </Media>
-                    Email@example.com.br
-                  </Media>
-                </Media>
-                <FormGroup check>
-                  <Label check className="ml-3">
-                    <Input type="checkbox" /> Check me out
-                  </Label>
-                </FormGroup>
-              </Card>
-              </Col>
-              </Row>
-              <br />
-              <Row>
-                <button className="btn btnAnimado">Add Account</button>
-                <button className="btn btnAnimado" onClick={toggle}>Delete Account</button>
-                <Modal isOpen={modal} toggle={toggle} className={className}>
-                  <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
-                  <ModalBody>
-                  Are you sure you want to delete your account?
-                  In a few days it will expire and you will no longer have access!
-                  </ModalBody>
-                  <ModalFooter>
-                    <button className="btn" onClick={toggle}>Yes, I'm sure!</button>{' '}
-                    <button className="btn" onClick={toggle}>No, wrong button...</button>
-                  </ModalFooter>
-                </Modal>
-              </Row>
-            </Form>
-          </Container>
+          <Jumbotron fluid className="descr-top">
+            <Container className="form_meio">
+              <h3>More</h3>
+              <hr />
+              <Form>
+                <Row>
+                  <Col sm="4">
+                    <Card body>
+                      <Media>
+                        <Media left top href="#">
+                          <img
+                            src="/iconMale.jpeg"
+                            alt="Profile pic"
+                            width={64}
+                            height={64}
+                            id="profile"
+                          />
+                        </Media>
+                        <Media body>
+                          <Media heading>
+                            Username
+                          </Media>
+                          Email@example.com.br
+                        </Media>
+                      </Media>
+                      <FormGroup check>
+                        <Label check className="ml-3">
+                          <Input type="checkbox" /> Check me out
+                        </Label>
+                      </FormGroup>
+                    </Card>
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm="4">
+                    <Card body>
+                      <Media>
+                        <Media left top href="#">
+                          <img
+                            src="/iconFemale.jpeg"
+                            alt="Profile pic"
+                            width={64}
+                            height={64}
+                            id="profile"
+                          />
+                        </Media>
+                        <Media body>
+                          <Media heading>
+                            Username
+                          </Media>
+                          Email@example.com.br
+                        </Media>
+                      </Media>
+                      <FormGroup check>
+                        <Label check className="ml-3">
+                          <Input type="checkbox" /> Check me out
+                        </Label>
+                      </FormGroup>
+                    </Card>
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <button className="btn btnAnimado">Add Account</button>
+                  <button className="btn btnAnimado" onClick={toggle}>Delete Account</button>
+                  <Modal isOpen={modal} toggle={toggle} className={className}>
+                    <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
+                    <ModalBody>
+                      Are you sure you want to delete your account?
+                      In a few days it will expire and you will no longer have access!
+                    </ModalBody>
+                    <ModalFooter>
+                      <button className="btn" onClick={toggle}>Yes, I'm sure!</button>{' '}
+                      <button className="btn" onClick={toggle}>No, wrong button...</button>
+                    </ModalFooter>
+                  </Modal>
+                </Row>
+              </Form>
+            </Container>
+          </Jumbotron>
         </Jumbotron>
       </div>
       <Footer />
@@ -234,20 +238,20 @@ function Config_profile(props) {
 export default Config_profile;
 
 
-export async function getServerSideProps(ctx){
-    
+export async function getServerSideProps(ctx) {
+
   const { MQtoken } = parseCookies(ctx)
 
-  if(!MQtoken){
-      return{
-          redirect: {
-              destination: '/login',
-              permanent: false,
-          }
+  if (!MQtoken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
       }
+    }
   }
 
-  return{
-     props: {} 
+  return {
+    props: {}
   }
 }

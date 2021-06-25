@@ -25,20 +25,35 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 library.add(fas)
 
-function webQuestions() {
+function webQuestions({ data_return }) {
 
-    
-        return (
-            <div>
-                <Head>
+    const dados = data_return.Query_result;
+    const questoes = dados.map((Query_result) =>
+        <div>
+            <div id="titulo">
+                <Row>
+                    <Col className="col-md-12">
+                        <ul>
+                            <li><b>Questão: {Query_result.ID_QUEST} -</b> {Query_result.DISCIPLINA} - {Query_result.CONTEUDO} | {Query_result.SERIE} | {Query_result.TRIMESTRE}</li>
+                        </ul>
+                    </Col>
+                </Row>
+            </div>
+        </div>
+    );
+
+
+    return (
+        <div>
+            <Head>
                 <title>
-                        MyQuestions
+                    MyQuestions
                 </title>
-                </Head>
-                <FadeIn>
-                    <Menu />
-                    <style>
-                        {`
+            </Head>
+            <FadeIn>
+                <Menu />
+                <style>
+                    {`
                         .main{
                             margin-top:100px !important;
                         }
@@ -96,38 +111,25 @@ function webQuestions() {
                             margin-top: 20px;
                         }
                         `}
-                    </style>
-                    <Container className="main">
-                        <Row>
-                            
-                        </Row>
-                        <Row>
-                            <Col className="col-sm-4">
-                                <label>Teste um, dois, três</label>
-                            </Col>
-                            <Col className="col-sm-4">
-                                <label>Teste um, dois, três</label>
-                            </Col>
-                            <Col className="col-sm-4">
-                                <label>Teste um, dois, três</label>
-                            </Col>
-                        </Row>
-                    </Container>
-                </FadeIn>
-                <Footer />
-            </div>
-        );
+                </style>
+                <Container className="main">
+                    {questoes}
+                </Container>
+            </FadeIn>
+            <Footer />
+        </div>
+    );
 
-    
+
 }
 export default webQuestions;
 
-export async function getServerSideProps(ctx){
-    
+export async function getServerSideProps(ctx) {
+
     const { MQtoken } = parseCookies(ctx)
 
-    if(!MQtoken){
-        return{
+    if (!MQtoken) {
+        return {
             redirect: {
                 destination: '/login',
                 permanent: false,
@@ -135,7 +137,13 @@ export async function getServerSideProps(ctx){
         }
     }
 
-    return{
-       props: {} 
-    }
+    const res = await fetch('http://localhost:8080/CreateQuest/all', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${MQtoken}` }
+    });
+    const data_return = await res.json();
+
+    return {
+        props: { data_return }
+    };
 }

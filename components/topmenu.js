@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image'
+import Router from 'next//router';
 import {
     Collapse,
     Navbar,
@@ -8,19 +9,25 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Container, 
-    ButtonDropdown, 
-    DropdownToggle, 
-    DropdownMenu, 
+    Container,
+    ButtonDropdown,
+    DropdownToggle,
+    DropdownMenu,
     DropdownItem,
     UncontrolledDropdown,
     Badge
 } from 'reactstrap';
+import { destroyCookie } from 'nookies';
 
 const Menu = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
+
+    function Logout() {
+        destroyCookie({}, 'MQtoken')
+        Router.push('/login')
+    }
 
     return (
         <div>
@@ -37,7 +44,7 @@ const Menu = (props) => {
                 }
                 `}
             </style>
-            <Navbar className="menu-custom" dark expand="md" fixed ="top">
+            <Navbar className="menu-custom" dark expand="md" fixed="top">
                 <Container>
                     <NavbarBrand href="/">
                         <Image
@@ -55,46 +62,41 @@ const Menu = (props) => {
                         <Nav className="mr-auto" navbar>
                             <NavItem>
                                 <NavLink href="/search">Pesquisar</NavLink>
-                            </NavItem> 
+                            </NavItem>
                             <NavItem>
                                 <NavLink href="/questions">Questões</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/createQuestions">Criar</NavLink> 
+                                <NavLink href="/createQuestions">Criar</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
-                                Configurações
+                                    Configurações
                                 </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem>
-                                            <NavItem>
-                                                <a href="/profile" className="textcolor">Profile</a>
-                                            </NavItem>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavItem>
-                                                <a href="/saved" className="textcolor">Saved</a>
-                                            </NavItem>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavItem>
-                                                <a href="/notifications" className="textcolor">Notifications <Badge color="secondary">9</Badge></a>
-                                            </NavItem>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavItem>
-                                                <a href="/" className="textcolor">Download</a>
-                                            </NavItem>
-                                        </DropdownItem>
-                                    </DropdownMenu>
+                                <DropdownMenu right>
+                                    <DropdownItem>
+                                        <NavItem>
+                                            <a href="/profile" className="textcolor">Profile</a>
+                                        </NavItem>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <NavItem>
+                                            <a href="/saved" className="textcolor">Saved</a>
+                                        </NavItem>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <NavItem>
+                                            <a href="/notifications" className="textcolor">Notifications <Badge color="secondary">9</Badge></a>
+                                        </NavItem>
+                                    </DropdownItem>
+                                </DropdownMenu>
                             </UncontrolledDropdown>
-                                </Nav>
-                            </Collapse>
-                        </Container>
-                        <Nav>
+                        </Nav>
+                    </Collapse>
+                </Container>
+                <Nav>
                     <NavItem>
-                        <NavLink href="/login"><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
+                        <NavLink onClick={Logout}><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>

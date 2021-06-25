@@ -25,11 +25,11 @@ import { AuthContext } from '../contexts/AuthContext';
 
 function Login() {
 
-    const [login, setLogin] = useState({        
+    const [login, setLogin] = useState({
         email: "",
         senha: ""
     });
-    
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [response, setRespose] = useState({
@@ -39,12 +39,12 @@ function Login() {
     });
 
     const onChangeInput = e => setLogin({ ...login, [e.target.name]: e.target.value });
-    
-    const {singIn} = useContext(AuthContext)
-    async function sendLogin(login){
+
+    const { singIn } = useContext(AuthContext)
+    async function sendLogin(login) {
         await singIn(login)
     }
-    
+
     return (
         <div>
             <Head>
@@ -124,7 +124,7 @@ function Login() {
                   }
                 `}
             </style>
-            
+
 
             <Navbar className="menu-custom" dark expand="md" fixed="top">
                 <Container>
@@ -147,8 +147,8 @@ function Login() {
                         <NavItem>
                             <Form inline onSubmit={handleSubmit(sendLogin)} noValidate>
                                 <FormGroup>
-                                    <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", {required: 'Enter your e-mail',pattern: {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i , message: 'Enter a valid e-mail address',}})} placeholder="Email:"  onChange={onChangeInput}/>
-                                    <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", {required: 'Enter your password'})} placeholder="Password:"  onChange={onChangeInput}/>
+                                    <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", { required: 'Enter your e-mail', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Enter a valid e-mail address', } })} placeholder="Email:" onChange={onChangeInput} />
+                                    <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", { required: 'Enter your password' })} placeholder="Password:" onChange={onChangeInput} />
                                     <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
                                 </FormGroup>
                             </Form>
@@ -159,9 +159,9 @@ function Login() {
 
 
             <Container className="imgLogin">
-                    {errors.email && <Alert color="danger">{errors.email.message}</Alert>}
-                    {errors.senha && <Alert color="danger">{errors.senha.message}</Alert>}
-             
+                {errors.email && <Alert color="danger">{errors.email.message}</Alert>}
+                {errors.senha && <Alert color="danger">{errors.senha.message}</Alert>}
+
                 <div className="divMain1">
                     <Image src="/teaching.svg" alt="ImagemLogin" width={600} height={600} />
                 </div>

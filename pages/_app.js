@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/Calendar.css';
 
 import { AuthProvider } from '../contexts/AuthContext'
 
 function MyApp({ Component, pageProps }) {
-    return(
+    return (
         <AuthProvider>
             <Component {...pageProps} />
-            </AuthProvider>
+        </AuthProvider>
     )
 }
 

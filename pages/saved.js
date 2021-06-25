@@ -6,7 +6,7 @@ import { parseCookies } from 'nookies'
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row } from 'reactstrap';
 
 
-const Config = (props) => {
+const Config_saved = (props) => {
   const {
     buttonLabel,
     className
@@ -193,20 +193,20 @@ const Config = (props) => {
 
 export default Config_saved;
 
-export async function getServerSideProps(ctx){
-    
+export async function getServerSideProps(ctx) {
+
   const { MQtoken } = parseCookies(ctx)
 
-  if(!MQtoken){
-      return{
-          redirect: {
-              destination: '/login',
-              permanent: false,
-          }
+  if (!MQtoken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
       }
+    }
   }
 
-  return{
-     props: {} 
+  return {
+    props: {}
   }
 }
