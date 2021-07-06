@@ -64,10 +64,10 @@ const Menu = (props) => {
                                 <NavLink href="/search">Pesquisar</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/questions">Questões</NavLink>
+                                <NavLink href="/questions">Minhas Questões</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/createQuestions">Criar</NavLink>
+                                <NavLink href="/createQuestions">Criação</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
@@ -76,7 +76,7 @@ const Menu = (props) => {
                                 <DropdownMenu right>
                                     <DropdownItem>
                                         <NavItem>
-                                            <a href="/profile" className="textcolor">Profile</a>
+                                            <a href="/profile" className="textcolor">Perfil</a>
                                         </NavItem>
                                     </DropdownItem>
                                     <DropdownItem>
@@ -86,19 +86,20 @@ const Menu = (props) => {
                                     </DropdownItem>
                                     <DropdownItem>
                                         <NavItem>
-                                            <a href="/notifications" className="textcolor">Notifications <Badge color="secondary">9</Badge></a>
+                                            <a href="/notifications" className="textcolor">Notificações <Badge color="secondary">9</Badge></a>
                                         </NavItem>
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
+                        <Nav>
+                            <NavItem>
+                                <NavLink onClick={Logout}><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
+                            </NavItem>
+                        </Nav>
                     </Collapse>
                 </Container>
-                <Nav>
-                    <NavItem>
-                        <NavLink onClick={Logout}><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
-                    </NavItem>
-                </Nav>
+
             </Navbar>
         </div>
     );

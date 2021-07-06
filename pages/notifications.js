@@ -97,7 +97,7 @@ const Config_notifications = (props) => {
             `}
       </style>
       <Jumbotron className="descr-top">
-        <h1 className="display-4 ml-4">Reminders</h1>
+        <h1 className="display-4 ml-4">Lembretes</h1>
         <hr />
         <CustomInput type="switch" id="exampleCustomSwitch" name="customSwitch" label="Turn on the notifications" />
 
@@ -113,7 +113,7 @@ const Config_notifications = (props) => {
             <Row>
               <Col className="col-md-4">
                 <Card>
-                  <CardTitle tag="h5">Reminder</CardTitle>
+                  <CardTitle tag="h5">Lembrete</CardTitle>
                   <CardBody>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">Dia 24/06</CardSubtitle>
                     <CardText>Avaliação Mensal</CardText>
@@ -124,7 +124,7 @@ const Config_notifications = (props) => {
               </Col>
               <Col className="col-md-4">
                 <Card>
-                  <CardTitle tag="h5">Reminder</CardTitle>
+                  <CardTitle tag="h5">Lembrete</CardTitle>
                   <CardBody>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">Dia 25/06</CardSubtitle>
                     <CardText>Avaliação Mensal</CardText>
@@ -135,7 +135,7 @@ const Config_notifications = (props) => {
               </Col>
               <Col className="col-md-4">
                 <Card>
-                  <CardTitle tag="h5">Reminder</CardTitle>
+                  <CardTitle tag="h5">Lembrete</CardTitle>
                   <CardBody>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">Dia 26/06</CardSubtitle>
                     <CardText>Avaliação Trimestral</CardText>

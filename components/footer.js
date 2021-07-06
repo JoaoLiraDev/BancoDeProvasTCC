@@ -12,10 +12,11 @@ const Footer = () => {
                     padding-top: 10px;
                     padding-bottom: 10px;
                     margin-bottom: 0rem !important;
-                }`}
+                }
+                `}
             </style>
             <Container className="text-center">
-                
+
                 <Row>
                     <Col className="col-md-4">
                         Sobre Nós
@@ -32,7 +33,8 @@ const Footer = () => {
 
                 <Row>
                     <Col className="col-md-4">
-                        Somos uma pequena equipe de 4 devs, produzindo suas ideias.
+                        Somos uma equipe de desenvolvimento, produzindo suas ideias.
+                        Todos os seus pensamentos pode virar uma realidade com nossa ajuda.
                     </Col>
 
                     <Col className="col-md-4">
@@ -40,7 +42,9 @@ const Footer = () => {
                     </Col>
 
                     <Col className="col-md-4">
-                        <a href="https://fieb.edu.br/">FIEB</a>
+                        <a href="https://fieb.edu.br/">FIEB</a><br />
+                        <a href="mailto:auth.myquestions@gmail.com">E-mail</a><br />
+                        <a href="https://github.com/JoaoLiraDev?tab=repositories">GitHub</a>
                     </Col>
                 </Row>
             </Container>
@@ -52,4 +56,4 @@ const Footer = () => {
 };
 
 
-export default Footer; 
+export default Footer;

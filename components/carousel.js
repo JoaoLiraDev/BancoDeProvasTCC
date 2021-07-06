@@ -11,33 +11,33 @@ const items = [
 
     {
         src: '../education.svg',
-        altText: 'Education',
-        caption: 'Collaborate with education and learning'
+        altText: 'Educação',
+        caption: 'Colaboração com a educação e aprendizado'
     },
     {
         src: '../Data.svg',
-        altText: 'Work',
-        caption: 'A new way of working your questions'
+        altText: 'Trabalho',
+        caption: 'Uma nova maneira de trabalhar com suas questões'
     },
     {
         src: '../quiz.svg',
-        altText: 'Quiz',
-        caption: 'Mount your activities more easily'
+        altText: 'Questionário',
+        caption: 'Monte suas atividades mais facilmente'
     },
     {
         src: '../Questions.svg',
-        altText: 'Questions',
-        caption: 'You can post your questions and collaborate with the community'
+        altText: 'Questões',
+        caption: 'Você pode compartilhar suas questões e colaboras com a comunidade'
     },
     {
         src: '../teacher.svg',
-        altText: 'Teachers',
-        caption: 'An APP designed for teachers'
+        altText: 'Professores',
+        caption: 'Uma aplicativo feito para professores'
     },
     {
         src: '../Group.svg',
-        altText: 'Group',
-        caption: 'A network to meet new people'
+        altText: 'Grupo',
+        caption: 'Uma rede social para conhecer novas pessoas'
     }
 ];
 

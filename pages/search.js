@@ -1,6 +1,7 @@
 import Menu from '../components/topmenu';
 import Footer from '../components/footer';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import Head from 'next/head';
 import FadeIn from 'react-fade-in';
 import ReactPaginate from "react-paginate";
@@ -14,10 +15,6 @@ import {
     Col,
     FormGroup,
     Input,
-    Collapse,
-    CardBody,
-    Card,
-    Table,
     Badge
 } from 'reactstrap';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -25,59 +22,50 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 library.add(fas)
 
 function webSearch({ data_return }) {
-    const PER_PAGE = 3;
+
+
     const dados = data_return.Query_result;
-    const [currentPage, setCurrentPage] = useState(0);
-    const [data, setData] = useState([]);
 
-    function handlePageClick({ selected: selectedPage }) {
-        setCurrentPage(selectedPage);
-    }
+    const questoes = dados.map((Query_result) =>
+        <div className="zoom">
+            <div id="titulo">
 
-    const offset = currentPage * PER_PAGE;
-
-    const questoes = dados
-        .slice(offset, offset + PER_PAGE)
-        .map((Query_result) =>
-            <div>
-                <div id="titulo">
-                    <Row>
-                        <Col className="col-md-3">
-                            <label key={Query_result.ID_QUEST} className="title">
-                                Série: {Query_result.SERIE}
-                            </label>
-                        </Col>
-                        <Col className="col-md-3">
-                            <label key={Query_result.ID_QUEST} className="title">
-                                Trimestre: {Query_result.TRIMESTRE}
-                            </label>
-                        </Col>
-                        <Col className="col-md-3">
-                            <label key={Query_result.ID_QUEST} className="title">
-                                Disciplina: {Query_result.DISCIPLINA}
-                            </label>
-                        </Col>
-                        <Col className="col-md-3">
-                            <label key={Query_result.ID_QUEST} className="title">
-                                Autor: {Query_result.AUTOR}
-                            </label>
-                        </Col>
-                    </Row>
-                </div>
-                <div className="bordinha">
-                    <Row>
-                        <Col className="col-sm-12">
-                            <h5 className="disciplina">{Query_result.CONTEUDO}</h5>
-                            <br />
-                            <p>{Query_result.DESCRICAO}</p>
-                        </Col>
-                    </Row>
-                </div>
-                <br />
+                <Row>
+                    <Col className="col-md-3">
+                        <label key={Query_result.SERIE} className="title">
+                            Série: {Query_result.SERIE}
+                        </label>
+                    </Col>
+                    <Col className="col-md-3">
+                        <label key={Query_result.TRIMESTRE} className="title">
+                            Trimestre: {Query_result.TRIMESTRE}
+                        </label>
+                    </Col>
+                    <Col className="col-md-3">
+                        <label key={Query_result.DISCIPLINA} className="title">
+                            Disciplina: {Query_result.DISCIPLINA}
+                        </label>
+                    </Col>
+                    <Col className="col-md-3">
+                        <label key={Query_result.AUTOR} className="title">
+                            Autor: {Query_result.AUTOR}
+                        </label>
+                    </Col>
+                </Row>
             </div>
-        );
-
-    const pageCount = Math.ceil(data.length / PER_PAGE);
+            <div className="bordinha">
+                <Row>
+                    <Col className="col-sm-12">
+                        <br />
+                        <h5 key={Query_result.CONTEUDO} className="disciplina">{Query_result.CONTEUDO}</h5>
+                        <br />
+                        <pre key={Query_result.DESCRICAO}>{Query_result.DESCRICAO}</pre>
+                    </Col>
+                </Row>
+            </div>
+            <br />
+        </div>
+    );
 
     return (
         <div>
@@ -90,19 +78,29 @@ function webSearch({ data_return }) {
                 <Menu />
                 <style>
                     {`
+                .zoom {
+                transition: transform .2s;
+                }
+
+                .zoom:hover {
+                transform: scale(1.05);
+                }
+
                 .bordinha{
                     border-bottom-style: solid;
                     border-left-style: solid;
                     border-right-style: solid;
-                    border-color: rgba(108, 117, 125,0.15);
+                    border-color: rgba(233, 109, 100, 0.9);
+                    border-radius: 0px 0px 10px 10px;
                 }
                 
-                p{
+                pre{
                     margin-left: 5px;
                 }
                 #titulo{
-                    background-color: rgba(108, 117, 125,0.15);
+                    background-color: rgba(233, 109, 100, 0.9);
                     text-align: center;
+                    border-radius: 10px 10px 0px 0px;
                 }
                 h5.disciplina{
                     text-align: center;
@@ -233,18 +231,6 @@ function webSearch({ data_return }) {
                     <br />
                     <div className="App">
                         {questoes}
-                        <h1>React Paginate Example</h1>
-                        <ReactPaginate
-                            previousLabel={"← Previous"}
-                            nextLabel={"Next →"}
-                            pageCount={pageCount}
-                            onPageChange={handlePageClick}
-                            containerClassName={"pagination"}
-                            previousLinkClassName={"pagination__link"}
-                            nextLinkClassName={"pagination__link"}
-                            disabledClassName={"pagination__link--disabled"}
-                            activeClassName={"pagination__link--active"}
-                        />
                     </div>
                     <br />
                     <br />
@@ -276,8 +262,6 @@ export async function getServerSideProps(ctx) {
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${MQtoken}` }
     });
     const data_return = await res.json();
-
-    console.log(data_return)
 
     return {
         props: { data_return }

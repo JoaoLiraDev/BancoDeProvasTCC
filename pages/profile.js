@@ -1,6 +1,7 @@
 import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import Footer from '../components/footer';
 import { parseCookies } from 'nookies'
 import {
@@ -27,6 +28,8 @@ import {
 
 
 function Config_profile(props) {
+
+  const { user } = useContext(AuthContext);
 
   const { buttonLabel, className } = props;
   const [modal, setModal] = useState(false);
@@ -109,26 +112,26 @@ function Config_profile(props) {
         <Jumbotron fluid className="descr-top">
           <Container className="text-center">
             <img src="profile.png" width="256px" height="256px" alt="img profile" />
-            <h1 className="display-3">Profile</h1>
-            <p className="lead">Username</p>
-            <p className="lead">Email@example.com.br</p>
+            <h1 className="display-3">Perfil</h1>
+            <p className="lead">{user.username}</p>
+            <p className="lead">{user.email}</p>
           </Container>
           <Container className="form_meio">
-            <h4 className="display-4">Edit</h4>
+            <h4 className="display-4">Editar</h4>
             <hr />
             <Form>
               <Row>
                 <Col className="col-md-6">
                   <FormGroup controlId="formGroupEmail">
-                    <Label>Email address</Label>
-                    <Input type="email" placeholder="Enter email" />
+                    <Label>Endereço de E-mail</Label>
+                    <Input type="email" placeholder="Enter email" defaultValue={user.email} />
                   </FormGroup>
                 </Col>
               </Row>
               <Row>
                 <Col className="col-md-6">
                   <FormGroup controlId="formGroupPassword">
-                    <Label>Password</Label>
+                    <Label>Senha</Label>
                     <Input type="password" placeholder="Password" />
                   </FormGroup>
                 </Col>
@@ -136,21 +139,21 @@ function Config_profile(props) {
               <Row>
                 <Col className="col-md-6">
                   <FormGroup controlId="formGroupPassword">
-                    <Label>Confirm Password</Label>
+                    <Label>Confirme a Senha</Label>
                     <Input type="password" placeholder="Password" />
                   </FormGroup>
                 </Col>
               </Row>
               <Row>
-                <button className="btn btnAnimado">Submit</button>
-                <button className="btn btnAnimado">Confirm Email</button>
+                <button className="btn btnAnimado">Salvar</button>
+                <button className="btn btnAnimado">Confirmar E-mail</button>
               </Row>
             </Form>
           </Container>
           <br />
           <Jumbotron fluid className="descr-top">
             <Container className="form_meio">
-              <h3>More</h3>
+              <h3>Mais</h3>
               <hr />
               <Form>
                 <Row>
@@ -168,7 +171,7 @@ function Config_profile(props) {
                         </Media>
                         <Media body>
                           <Media heading>
-                            Username
+                            Nome de usuário
                           </Media>
                           Email@example.com.br
                         </Media>
@@ -197,7 +200,7 @@ function Config_profile(props) {
                         </Media>
                         <Media body>
                           <Media heading>
-                            Username
+                            Nome de usuário
                           </Media>
                           Email@example.com.br
                         </Media>
@@ -212,17 +215,17 @@ function Config_profile(props) {
                 </Row>
                 <br />
                 <Row>
-                  <button className="btn btnAnimado">Add Account</button>
-                  <button className="btn btnAnimado" onClick={toggle}>Delete Account</button>
+                  <button className="btn btnAnimado">Adicionar Conta</button>
+                  <button className="btn btnAnimado" onClick={toggle}>Excluir Conta</button>
                   <Modal isOpen={modal} toggle={toggle} className={className}>
-                    <ModalHeader toggle={toggle}>Delete Account</ModalHeader>
+                    <ModalHeader toggle={toggle}>Excluir Conta</ModalHeader>
                     <ModalBody>
-                      Are you sure you want to delete your account?
-                      In a few days it will expire and you will no longer have access!
+                      Você tem certeza de que deseja excluir esta conta?
+                      Em alguns dias será expirado e você não terá mais acesso!
                     </ModalBody>
                     <ModalFooter>
-                      <button className="btn" onClick={toggle}>Yes, I'm sure!</button>{' '}
-                      <button className="btn" onClick={toggle}>No, wrong button...</button>
+                      <button className="btn" onClick={toggle}>Sim, tenho certeza</button>{' '}
+                      <button className="btn" onClick={toggle}>Não, botão errado...</button>
                     </ModalFooter>
                   </Modal>
                 </Row>

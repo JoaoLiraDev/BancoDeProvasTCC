@@ -1,12 +1,17 @@
 import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import Footer from '../components/footer';
 import { parseCookies } from 'nookies'
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row } from 'reactstrap';
 
 
 const Config_saved = (props) => {
+
+
+  const { user } = useContext(AuthContext);
+
   const {
     buttonLabel,
     className

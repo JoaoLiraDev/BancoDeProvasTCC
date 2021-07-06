@@ -18,8 +18,9 @@ import {
     Label,
     Alert
 } from 'reactstrap';
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import { AuthContext } from '../contexts/AuthContext';
+import Router from 'next//router';
 
 
 
@@ -32,17 +33,17 @@ function Login() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const [response, setRespose] = useState({
-        formSave: false,
-        type: '',
-        message: ''
-    });
 
     const onChangeInput = e => setLogin({ ...login, [e.target.name]: e.target.value });
 
-    const { singIn } = useContext(AuthContext)
+    const { user, singIn } = useContext(AuthContext)
     async function sendLogin(login) {
         await singIn(login)
+        console.log(user)
+    }
+
+    function Cadastrar() {
+        Router.push('/Cadastrar')
     }
 
     return (
@@ -70,7 +71,8 @@ function Login() {
                     overflow: hidden;
                     border: 2px solid #E96C64;
                     position: relative;
-                    color: #000 !important;
+                    z-index: 2; 
+                    
                     
                 }
                 .btn:before{
@@ -81,32 +83,30 @@ function Login() {
                   transform: translate(-50%, -50%);
                   width: 100%;
                   height: 100%;
-                  color:#E96C64 ;
                   background-color: #E96C64;
-                  
-                  z-index: -1;
-                  
+                  z-index: -1;     
                   transition: 0.7s ease;
                 }
                 .btnAnimado{
-                    
+                    color:#E96C64 ;
                     
                 }.btnAnimado:before{
                   content:'';
-                    width: 0;
+                  width: 0;
                   height: 100%;
-                  color:#000 !important;
-
+                  color:#fff !important;
                 }.btnAnimado:hover:before{
                     width: 100%;
-                    color:#000 !important;
+                    color:#fff !important;
+                  
                 }
+
                 #btnLogin{
                     width: 100px;
-                    color: #000 !important;
+                    
                 }
                 #btnCadastrar{
-                    width: 150px;
+                    width: 120px;
                 }
                 .divMain1{
                     display: inline;    
@@ -185,47 +185,26 @@ function Login() {
                         <Row>
                             <Col className="col-md-10">
                                 <Label for="email">Email:</Label>
-                                <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", { required: 'Enter your e-mail', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Enter a valid e-mail address', } })} placeholder="Email:" onChange={onChangeInput} />
+                                <Input className="form-control mr-sm-2" type="text" name="email" id="email"{...register("email", { required: 'Insira um e-mail.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Insira um e-mail válido', } })} placeholder="Email:" onChange={onChangeInput} />
                             </Col>
                         </Row>
                         <Row>
                             <Col className="col-md-10">
                                 <Label for="senha">Password:</Label>
-                                <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", { required: 'Enter your password' })} placeholder="Password:" onChange={onChangeInput} />
+                                <Input className="form-control mr-sm-2" type="password" name="senha" id="senha" {...register("senha", { required: 'Insira uma senha' })} placeholder="Password:" onChange={onChangeInput} />
                             </Col>
                         </Row>
                         <br />
                         <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
                         <div className="separator">ou faça seu cadastro agora.</div>
                     </Form>
-                    {/*                     
-                    <Form className="form">
-                        <FormGroup>
-                            <Label for="autor">Nome Completo:</Label>
-                            <Input type="text" name="nomeCadstro" id="nomeCadstro" placeholder="Nome Completo:" />
-                        </FormGroup>
+                    <Row>
+                        <Col className="col-md-10">
+                            <button type="submit" onClick={Cadastrar} className="btn btnAnimado" id="btnCadastrar" >Cadastrar-se</button>
+                        </Col>
 
-                        <FormGroup>
-                            <Label for="autor">E-mail:</Label>
-                            <Input type="email" name="email" id="email" placeholder="E-mail:" />
-                        </FormGroup>
+                    </Row>
 
-                        <FormGroup>
-                            <Label for="autor">Senha:</Label>
-                            <Input type="password" name="senha" id="senha" placeholder="Senha:" />
-                        </FormGroup>
-
-
-                        <Row>
-                            <Col className="col-md-1"></Col>
-                            <Col className="col-md-1"></Col>
-                            <Col className="col-md-1"></Col>
-                            <Col className="col-md-1"></Col>
-                            <Col className="col-md-6 ">
-                                <button type="submit" className="btn btnAnimado" id="btnCadastrar" >Cadastrar-se</button>
-                            </Col>
-                        </Row>
-                    </Form> */}
                 </div>
 
 

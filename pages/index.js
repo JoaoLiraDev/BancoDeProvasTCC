@@ -103,19 +103,22 @@ function HomePage() {
                   }
                   hr{
                       border: 3px solid !important;
-                      width: 500px;
+                      width: 700px;
+                      margin-top: 70px;
                   }
                   .containerFlex{
                       display: flex;
+                      margin-top: 100px;
+                      margin-bottom: 50px;
                   }
                 `}
             </style>
 
             <Jumbotron className="descr-top">
-                <h1 className="display-4 ml-4">Welcome to My Questions!</h1>
+                <h1 className="display-4 ml-4">Bem-vindos à plataforma MyQuestions!</h1>
                 <hr />
                 <Carocel />
-                <br />
+
 
                 <Container className="containerFlex">
                     <div>
@@ -129,8 +132,8 @@ function HomePage() {
                     </div>
                     <div>
                         <h2> Sobre Nós </h2>
-                        <p> My Questions foi desenvolvido em prol do trabalho dos professores da rede Fieb, como uma ferramenta
-                            facilitando a criação de provas do jeitinho Fieb.
+                        <p> My Questions foi desenvolvido em prol do trabalho dos professores da rede FIEB, como uma ferramenta
+                            facilitando a criação de provas.
                         </p>
                     </div>
                 </Container>
