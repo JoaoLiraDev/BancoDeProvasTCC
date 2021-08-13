@@ -16,7 +16,8 @@ import {
     Collapse,
     CardBody,
     Card,
-    Table
+    Table,
+    Alert
 } from 'reactstrap';
 import { parseCookies } from 'nookies';
 import Router from 'next//router';
@@ -28,9 +29,54 @@ library.add(fas)
 
 function webQuestions({ data_return }) {
 
+    const { 'MQtoken': token } = parseCookies();
+
+    const [response, setResponse] = useState({
+        formSave: false,
+        type: '',
+        message: ''
+    });
+    const apagarQuest = async (id_quest) => {
+        console.log(id_quest)
+
+        try {
+            const res = await fetch("http://localhost:8080/CreateQuest/delete_quest/" + id_quest, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+            });
+            const responseEnv = await res.json();
+
+            if (responseEnv.error) {
+                setResponse({
+                    formSave: false,
+                    type: 'error',
+                    message: responseEnv.mensagem
+                });
+            } else {
+                setResponse({
+                    formSave: false,
+                    type: 'success',
+                    message: responseEnv.mensagem
+                });
+
+
+            }
+        } catch (err) {
+            setResponse({
+                formSave: false,
+                type: 'error',
+                message: "Erro: Falha ao deletar questão!"
+            });
+        }
+
+        setTimeout(() => {
+            Router.reload()
+        }, 2500);
+    };
+
     function Adicionar() {
         Router.push('/createQuestions')
-    }
+    };
 
     const dados = data_return.Query_result;
     const questoes = dados.map((Query_result) =>
@@ -45,7 +91,7 @@ function webQuestions({ data_return }) {
                     </Col>
                     <Col className="col-md-3">
                         <label key={Query_result.TRIMESTRE} className="title">
-                            Trimestre: {Query_result.TRIMESTRE}
+                            {Query_result.TRIMESTRE}
                         </label>
                     </Col>
                     <Col className="col-md-3">
@@ -53,10 +99,30 @@ function webQuestions({ data_return }) {
                             Disciplina: {Query_result.DISCIPLINA}
                         </label>
                     </Col>
-                    <Col className="col-md-3">
+                    <Col className="col-md-2">
                         <label key={Query_result.AUTOR} className="title">
                             Autor: {Query_result.AUTOR}
                         </label>
+                    </Col>
+                    <Col className="col-md-1">
+                        <img
+                            src="/edit.svg"
+                            alt="Editar"
+                            width={25}
+                            height={25}
+                            className="zoom"
+                            id="Editar"
+                            onClick={() => editar(Query_result.ID_QUEST)}
+                        />
+                        <img
+                            src="/trash.svg"
+                            alt="lixeira"
+                            width={27}
+                            height={27}
+                            className="zoom"
+                            id="lixeira"
+                            onClick={() => apagarQuest(Query_result.ID_QUEST)}
+                        />
                     </Col>
                 </Row>
             </div>
@@ -100,6 +166,7 @@ function webQuestions({ data_return }) {
                         border-right-style: solid;
                         border-color: rgba(233, 109, 100, 0.9);
                         border-radius: 0px 0px 10px 10px;
+                        
                         }
                         
                     pre{
@@ -182,6 +249,8 @@ function webQuestions({ data_return }) {
                 </style>
                 <Container className="main">
                     <br />
+                    {response.type === 'error' ? <Alert color="danger">{response.message}</Alert> : ""}
+                    {response.type === 'success' ? <Alert color="success">{response.message}</Alert> : ""}
                     <Row>
                         <Col className="col-md-12">
                             <button type="submit" className="btn btnAnimado" id="btnAdicionar" onClick={Adicionar}>Adicionar</button>
