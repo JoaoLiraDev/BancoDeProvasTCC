@@ -81,12 +81,7 @@ const Menu = (props) => {
                                     </DropdownItem>
                                     <DropdownItem>
                                         <NavItem>
-                                            <a href="/saved" className="textcolor">Saved</a>
-                                        </NavItem>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <NavItem>
-                                            <a href="/notifications" className="textcolor">Notificações <Badge color="secondary">9</Badge></a>
+                                            <a href="/notifications" className="textcolor">Lembretes </a>
                                         </NavItem>
                                     </DropdownItem>
                                 </DropdownMenu>

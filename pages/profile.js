@@ -5,40 +5,31 @@ import { AuthContext } from '../contexts/AuthContext';
 import Footer from '../components/footer';
 import { parseCookies } from 'nookies'
 import {
-  Button,
-  ButtonGroup,
-  Jumbotron,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Container,
-  Row,
-  Col,
-  Toast,
-  ToastBody,
-  ToastHeader,
-  Media,
-  Card
+	Button, ButtonGroup, Jumbotron, Form, FormGroup, Label, Input, Modal, ModalHeader,
+	ModalBody, ModalFooter, Container, Row, Col, Toast, ToastBody, ToastHeader, Media, Card, CardImg, CardText, CardBody,
+	CardTitle, CardSubtitle
 } from 'reactstrap';
-
+import Head from 'next/head';
 
 function Config_profile(props) {
 
-  const { user } = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 
-  const { buttonLabel, className } = props;
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
-  return (
-    <div>
-      <Menu />
-      <style>
-        {`
+	const { buttonLabel, className } = props;
+	const [modal, setModal] = useState(false);
+	const toggle = () => setModal(!modal);
+
+	return (
+		<div>
+			<Head>
+				<title>
+					MyQuestions
+				</title>
+			</Head>
+
+			<Menu />
+			<style>
+				{`
               .main{
                 margin-top:100px;
               }
@@ -82,7 +73,6 @@ function Config_profile(props) {
               
             }
               #imgpos {
-              position: absolute;
               left: 60%;
               top: 15%
               } 
@@ -101,160 +91,109 @@ function Config_profile(props) {
               .form_meio{
                 margin-left:25rem !important; 
               }
-              #profile{
-                border-radius: 50% !important;
-                margin-right: 1rem !important;
+              .card_top{
+                margin-top: 7rem !important;
+                margin-left: 3rem !important;
               }
+              hr{
+                border-top: 3px solid black;
+              }
+			  .divMain1{
+				display: inline;    
+				width: 50%;
+				float: left;
+			}
+			.divMain2{
+				display: inline;
+				width: 50%;
+				float: right;
+				margin-top: 50px;
+				padding-left: 145px;
+			}
             `}
-      </style>
+			</style>
 
-      <div>
-        <Jumbotron fluid className="descr-top">
-          <Container className="text-center">
-            <img src="profile.png" width="256px" height="256px" alt="img profile" />
-            <h1 className="display-3">Perfil</h1>
-            <p className="lead">{user.username}</p>
-            <p className="lead">{user.email}</p>
-          </Container>
-          <Container className="form_meio">
-            <h4 className="display-4">Editar</h4>
-            <hr />
-            <Form>
-              <Row>
-                <Col className="col-md-6">
-                  <FormGroup controlId="formGroupEmail">
-                    <Label>Endereço de E-mail</Label>
-                    <Input type="email" placeholder="Enter email" defaultValue={user.email} />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="col-md-6">
-                  <FormGroup controlId="formGroupPassword">
-                    <Label>Senha</Label>
-                    <Input type="password" placeholder="Password" />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="col-md-6">
-                  <FormGroup controlId="formGroupPassword">
-                    <Label>Confirme a Senha</Label>
-                    <Input type="password" placeholder="Password" />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row>
-                <button className="btn btnAnimado">Salvar</button>
-                <button className="btn btnAnimado">Confirmar E-mail</button>
-              </Row>
-            </Form>
-          </Container>
-          <br />
-          <Jumbotron fluid className="descr-top">
-            <Container className="form_meio">
-              <h3>Mais</h3>
-              <hr />
-              <Form>
-                <Row>
-                  <Col sm="4">
-                    <Card body>
-                      <Media>
-                        <Media left top href="#">
-                          <img
-                            src="/iconMale.jpeg"
-                            alt="Profile pic"
-                            width={64}
-                            height={64}
-                            id="profile"
-                          />
-                        </Media>
-                        <Media body>
-                          <Media heading>
-                            Nome de usuário
-                          </Media>
-                          Email@example.com.br
-                        </Media>
-                      </Media>
-                      <FormGroup check>
-                        <Label check className="ml-3">
-                          <Input type="checkbox" /> Check me out
-                        </Label>
-                      </FormGroup>
-                    </Card>
-                  </Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col sm="4">
-                    <Card body>
-                      <Media>
-                        <Media left top href="#">
-                          <img
-                            src="/iconFemale.jpeg"
-                            alt="Profile pic"
-                            width={64}
-                            height={64}
-                            id="profile"
-                          />
-                        </Media>
-                        <Media body>
-                          <Media heading>
-                            Nome de usuário
-                          </Media>
-                          Email@example.com.br
-                        </Media>
-                      </Media>
-                      <FormGroup check>
-                        <Label check className="ml-3">
-                          <Input type="checkbox" /> Check me out
-                        </Label>
-                      </FormGroup>
-                    </Card>
-                  </Col>
-                </Row>
-                <br />
-                <Row>
-                  <button className="btn btnAnimado">Adicionar Conta</button>
-                  <button className="btn btnAnimado" onClick={toggle}>Excluir Conta</button>
-                  <Modal isOpen={modal} toggle={toggle} className={className}>
-                    <ModalHeader toggle={toggle}>Excluir Conta</ModalHeader>
-                    <ModalBody>
-                      Você tem certeza de que deseja excluir esta conta?
-                      Em alguns dias será expirado e você não terá mais acesso!
-                    </ModalBody>
-                    <ModalFooter>
-                      <button className="btn" onClick={toggle}>Sim, tenho certeza</button>{' '}
-                      <button className="btn" onClick={toggle}>Não, botão errado...</button>
-                    </ModalFooter>
-                  </Modal>
-                </Row>
-              </Form>
-            </Container>
-          </Jumbotron>
-        </Jumbotron>
-      </div>
-      <Footer />
-    </div >
-  );
+			<div>
+				<Jumbotron fluid className="descr-top">
+					<Container>
+						<h1>Meu perfil</h1>
+						<hr />
+						<Row>
+							<Col sm={{ size: 'auto' }}>
+								<img src="ProfilePage.svg" width="556px" height="556px" alt="img profile" id="imgpos" />
+							</Col>
+							<Col sm={{ size: 'auto', offset: 2 }}>
+								<Card>
+									<CardImg top width="200px" height="200px" src="iconFemale.jpeg" alt="Card image cap" />
+									<CardBody>
+										<CardTitle tag="h5">{user.username}</CardTitle>
+										<CardSubtitle tag="h6" className="mb-2 text-muted">{user.email}</CardSubtitle>
+									</CardBody>
+								</Card>
+							</Col>
+						</Row>
+						<br />
+						<h2>Editar</h2>
+						<hr />
+						<Form>
+							<div className="divMain1">
+								<Row>
+									<Col className="col-md-8">
+										<FormGroup controlId="formGroupEmail">
+											<Label>Endereço de E-mail</Label>
+											<Input type="email" placeholder="Email" defaultValue={user.email} />
+										</FormGroup>
+									</Col>
+								</Row>
+								<Row>
+									<Col className="col-md-8">
+										<FormGroup controlId="formGroupPassword">
+											<Label>Senha</Label>
+											<Input type="password" placeholder="Senha" />
+										</FormGroup>
+									</Col>
+								</Row>
+								<Row>
+									<Col className="col-md-8">
+										<FormGroup controlId="formGroupPassword">
+											<Label>Confirme a Senha</Label>
+											<Input type="password" placeholder="Confirme a Senha" />
+										</FormGroup>
+									</Col>
+								</Row>
+								<Row>
+									<button className="btn btnAnimado">Salvar</button>
+									<button className="btn btnAnimado">Confirmar E-mail</button>
+								</Row>
+							</div>
+			  				<div className="divMain2">
+								<img src="Personal_settings.svg" width="456px" height="456px" alt="img profile" />
+							</div>
+							
+						</Form>
+					</Container>
+				</Jumbotron>
+			</div>
+		</div >
+	);
 };
 export default Config_profile;
 
 
 export async function getServerSideProps(ctx) {
 
-  const { MQtoken } = parseCookies(ctx)
+	const { MQtoken } = parseCookies(ctx)
 
-  if (!MQtoken) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      }
-    }
-  }
+	if (!MQtoken) {
+		return {
+			redirect: {
+				destination: '/login',
+				permanent: false,
+			}
+		}
+	}
 
-  return {
-    props: {}
-  }
+	return {
+		props: {}
+	}
 }

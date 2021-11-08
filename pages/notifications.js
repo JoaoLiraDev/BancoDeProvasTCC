@@ -1,20 +1,39 @@
+import React, { useState } from 'react';
 import Menu from '../components/topmenu';
 import Smallfooter from '../components/smallfooter';
-import React, { useState } from 'react';
 import Footer from '../components/footer';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardGroup, Button, Container, Jumbotron, Col, Row, CustomInput } from 'reactstrap';
 import { parseCookies } from 'nookies';
 import Calendar from 'react-calendar';
+import Head from 'next/head';
+import ModalForm from '../components/ModalAddLembrete'
 
+function Config_notifications (props){
 
-const Config_notifications = (props) => {
   const [date, setDate] = useState(new Date());
-  const {
-    buttonLabel,
-    className
-  } = props;
+  
+  const dados = props.data_return.Lembrete
+  const lembretesCard = dados.map((Lembrete) => 
+  <Col className="col-md-4" key={Lembrete.ID_LEMBRETE}>
+    <Card body className="text-center">
+      <CardTitle tag="h5">Lembrete</CardTitle>
+      <CardBody>
+        <CardSubtitle tag="h6" className="mb-2 text-muted">Dia {Lembrete.dataLembrete}</CardSubtitle>
+        <CardText>{Lembrete.TITULO_LEMBRTE}</CardText>
+        <br />
+        <button className="btn btnAnimado">Ignorar</button>
+      </CardBody>
+    </Card>
+    <br/>
+  </Col>
+  )
   return (
     <div>
+      <Head>
+        <title>
+          MyQuestions
+        </title>
+      </Head>
       <Menu />
       <style>
         {`
@@ -78,7 +97,7 @@ const Config_notifications = (props) => {
                 margin-top: 2rem !important;
               }
               .calendar_meio{
-                margin-left: 15rem !important; 
+                margin-left: 10rem !important; 
               }
               .reminder{
                 margin-left: 40rem !important;
@@ -93,63 +112,47 @@ const Config_notifications = (props) => {
               .display{
                 display: flex !important;
               }
-              
+              hr{
+                border-top: 3px solid black;
+              }
+              .form_meio{
+                margin-left:25rem !important; 
+              }
             `}
       </style>
-      <Jumbotron className="descr-top">
-        <h1 className="display-4 ml-4">Lembretes</h1>
-        <hr />
-        <CustomInput type="switch" id="exampleCustomSwitch" name="customSwitch" label="Turn on the notifications" />
-
-        <Container className="display">
-          <div>
-            <Calendar className="calendar"
-              onChange={setDate}
-              value={date}
-            />
-          </div>
-
-          <div>
+      <div>
+        <Jumbotron fluid className="descr-top">
+        <Container>
             <Row>
-              <Col className="col-md-4">
-                <Card>
-                  <CardTitle tag="h5">Lembrete</CardTitle>
-                  <CardBody>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">Dia 24/06</CardSubtitle>
-                    <CardText>Avaliação Mensal</CardText>
-                    <button className="btn btnAnimado">Ignorar</button><br />
-                    <button className="btn btnAnimado">Lembrar de novo...</button>
-                  </CardBody>
-                </Card>
+              <Col>
+                <h1>Lembretes</h1>
               </Col>
-              <Col className="col-md-4">
-                <Card>
-                  <CardTitle tag="h5">Lembrete</CardTitle>
-                  <CardBody>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">Dia 25/06</CardSubtitle>
-                    <CardText>Avaliação Mensal</CardText>
-                    <button className="btn btnAnimado">Ignorar</button><br />
-                    <button className="btn btnAnimado">Lembrar de novo...</button>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col className="col-md-4">
-                <Card>
-                  <CardTitle tag="h5">Lembrete</CardTitle>
-                  <CardBody>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">Dia 26/06</CardSubtitle>
-                    <CardText>Avaliação Trimestral</CardText>
-                    <button className="btn btnAnimado">Ignorar</button><br />
-                    <button className="btn btnAnimado">Lembrar de novo...</button>
-                  </CardBody>
-                </Card>
+              <Col className="offset-8">
+                <ModalForm/>
               </Col>
             </Row>
-          </div>
-        </Container>
-      </Jumbotron>
-      <Footer />
-    </div>
+            <hr />
+            <Row>
+              <Col className="col-md-4 offset-4">
+                <Calendar className="calendar"
+                onChange={setDate}
+                value={date} />
+              </Col>
+            </Row>
+            
+          </Container>
+          <br/>
+          <Container>
+          <hr />
+            <Row>
+              {lembretesCard}
+            </Row>
+            
+          </Container>
+        </Jumbotron>
+      </div >
+     
+    </div >
   );
 };
 
@@ -167,8 +170,14 @@ export async function getServerSideProps(ctx) {
       }
     }
   }
+  const res = await fetch('http://localhost:8080/CreateQuest/lembretes', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${MQtoken}` }
+});
 
+  const data_return = await res.json();
+  
   return {
-    props: {}
+    props: { data_return }
   }
 }

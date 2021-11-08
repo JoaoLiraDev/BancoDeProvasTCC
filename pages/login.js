@@ -195,19 +195,15 @@ function Login() {
                             </Col>
                         </Row>
                         <br />
-                        <button type="submit" className="btn btnAnimado" id="btnLogin" >Login</button>
+                        <button type="submit" className="btn btnAnimado" id="btnLogin" style={{ width: "134px;" }}>Login</button>
                         <div className="separator">ou faça seu cadastro agora.</div>
                     </Form>
                     <Row>
                         <Col className="col-md-10">
                             <button type="submit" onClick={Cadastrar} className="btn btnAnimado" id="btnCadastrar" >Cadastrar-se</button>
                         </Col>
-
                     </Row>
-
                 </div>
-
-
             </Container>
         </div>
     );

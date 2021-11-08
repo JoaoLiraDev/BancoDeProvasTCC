@@ -11,17 +11,23 @@ import {
     Container,
     Row,
     Col,
+    Form,
     FormGroup,
+    Label,
     Input,
     Collapse,
     CardBody,
     Card,
     Table,
-    Alert
+    Alert,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter
 } from 'reactstrap';
 import { parseCookies } from 'nookies';
 import Router from 'next//router';
-
+import {dadosQuest} from '../services/funcContextUser';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -36,8 +42,8 @@ function webQuestions({ data_return }) {
         type: '',
         message: ''
     });
+    const dados = data_return.Query_result;
     const apagarQuest = async (id_quest) => {
-        console.log(id_quest)
 
         try {
             const res = await fetch("http://localhost:8080/CreateQuest/delete_quest/" + id_quest, {
@@ -78,9 +84,19 @@ function webQuestions({ data_return }) {
         Router.push('/createQuestions')
     };
 
-    const dados = data_return.Query_result;
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
+    
+    function editarQuestPage(id) {
+
+        dadosQuest(id)
+
+        Router.push('/editQuestions')
+    }
+    
     const questoes = dados.map((Query_result) =>
-        <div className="zoom">
+        <div className="zoom" key={Query_result.ID_QUEST}>
             <div id="titulo">
 
                 <Row>
@@ -91,7 +107,7 @@ function webQuestions({ data_return }) {
                     </Col>
                     <Col className="col-md-3">
                         <label key={Query_result.TRIMESTRE} className="title">
-                            {Query_result.TRIMESTRE}
+                            Trimestre: {Query_result.TRIMESTRE}
                         </label>
                     </Col>
                     <Col className="col-md-3">
@@ -112,7 +128,7 @@ function webQuestions({ data_return }) {
                             height={25}
                             className="zoom"
                             id="Editar"
-                            onClick={() => editar(Query_result.ID_QUEST)}
+                            onClick={() => editarQuestPage(Query_result.ID_QUEST)}
                         />
                         <img
                             src="/trash.svg"

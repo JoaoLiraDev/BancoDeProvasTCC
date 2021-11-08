@@ -30,7 +30,7 @@ function Cadastrar() {
         nome: "",
         senha: "",
         email: "",
-        fist_name: "",
+        first_name: "",
         last_name: "",
         especialidade: "-",
         dt_nasc: ""
@@ -225,13 +225,13 @@ function Cadastrar() {
                             <Col>
                                 <FormGroup>
                                     <Label for="autor">Primeiro Nome:</Label>
-                                    <Input type="text" name="firstName" id="firstName" {...register("firstName", { required: 'Insira seu primeiro nome' })} placeholder="Primeiro Nome:" onChange={onChangeInput} />
+                                    <Input type="text" name="first_name" id="first_name" {...register("first_name", { required: 'Insira seu primeiro nome' })} placeholder="Primeiro Nome:" onChange={onChangeInput} />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Label for="autor">Sobrenome Nome:</Label>
-                                    <Input type="text" name="SobreNome" id="SobreNome" {...register("SobreNome", { required: 'Insira seu sobrenome' })} placeholder="Sobrenome:" onChange={onChangeInput} />
+                                    <Input type="text" name="last_name" id="last_name" {...register("last_name", { required: 'Insira seu sobrenome' })} placeholder="Sobrenome:" onChange={onChangeInput} />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -243,7 +243,7 @@ function Cadastrar() {
                             <Col>
                                 <FormGroup>
                                     <Label for="autor">Nickname:</Label>
-                                    <Input type="text" name="Nickname" id="Nickname" {...register("Nickname", { required: 'Insira um nickname' })} placeholder="Nickname:" onChange={onChangeInput} />
+                                    <Input type="text" name="nome" id="nome" {...register("nome", { required: 'Insira um nickname' })} placeholder="Nickname:" onChange={onChangeInput} />
                                 </FormGroup>
 
                             </Col>
