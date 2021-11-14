@@ -33,23 +33,23 @@ const Footer = () => {
 
                 <Row>
                     <Col className="col-md-4">
-                        Somos uma equipe de desenvolvimento, produzindo suas ideias.
-                        Todos os seus pensamentos pode virar uma realidade com nossa ajuda.
+                        Trabalho acadêmico de conclusão de curso.
+                        Equipe MyQuestions.
                     </Col>
 
                     <Col className="col-md-4">
-                        (+55)11 4002-8922
+                        (+55)11 4003-7479
                     </Col>
 
                     <Col className="col-md-4">
                         <a href="https://fieb.edu.br/">FIEB</a><br />
                         <a href="mailto:auth.myquestions@gmail.com">E-mail</a><br />
-                        <a href="https://github.com/JoaoLiraDev?tab=repositories">GitHub</a>
+                       
                     </Col>
                 </Row>
             </Container>
             <Container className="text-center">
-                <h7>© 2021 Copyright</h7>
+                <h7>© MyQuestions, since 2019</h7>
             </Container>
         </Jumbotron>
     );

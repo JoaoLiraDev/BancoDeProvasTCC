@@ -69,26 +69,15 @@ const Menu = (props) => {
                             <NavItem>
                                 <NavLink href="/createQuestions">Criação</NavLink>
                             </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Configurações
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        <NavItem>
-                                            <a href="/profile" className="textcolor">Perfil</a>
-                                        </NavItem>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <NavItem>
-                                            <a href="/notifications" className="textcolor">Lembretes </a>
-                                        </NavItem>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
+                            <NavItem>
+                                <NavLink href="/notifications" className="textcolor">Lembretes </NavLink>
+                            </NavItem>
                         </Nav>
                         <Nav>
-                            <NavItem>
+                            <NavItem> 
+                                <NavLink href="/profile"><Image src="/settings.png" alt="Picture of the author" width={25} height={25} /></NavLink>
+                            </NavItem>
+                            <NavItem> 
                                 <NavLink onClick={Logout}><Image src="/logout.png" alt="Picture of the author" width={20} height={20} /></NavLink>
                             </NavItem>
                         </Nav>

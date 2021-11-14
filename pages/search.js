@@ -1,12 +1,10 @@
-import Menu from '../components/topmenu';
-import Footer from '../components/footer';
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import Menu from '../components/topmenu';
 import Head from 'next/head';
+import Router from 'next//router';
 import FadeIn from 'react-fade-in';
-import ReactPaginate from "react-paginate";
-import { parseCookies } from 'nookies'
-import { api } from '../services/api'
+import { parseCookies, setCookie } from 'nookies';
 import {
     Jumbotron,
     Button,
@@ -15,23 +13,68 @@ import {
     Col,
     FormGroup,
     Input,
-    Badge
+    Badge,
+    Label
 } from 'reactstrap';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-library.add(fas)
 
 function webSearch({ data_return }) {
 
+    const [busca, setBusca] = useState({
+        search:null
+    })
+    function searchSpace(event){
+        let keyword = event.target.value;
+        setBusca({search:keyword})
+      }
+    
+    
+    var myArr = []
+
+    function addArr(num){
+        if(myArr.includes(num) == true){
+            var index = myArr.indexOf(num)
+            if(index > -1){
+                myArr.splice(index, 1)
+                 
+            }
+        }else{
+            myArr.push(num)
+               
+        }
+        
+    }
+
+    
+    function MakeTest(){
+        if(myArr.length != 0){
+     
+            setCookie(null, 'id', myArr, {
+                maxAge: 60 * 60 * 7,
+                path: '/'
+              });
+
+            setTimeout(() => {
+                Router.push('/createTest')
+            }, 1000);
+            
+        }else{
+            alert("Por favor selecione uma questão para montar a avaliação!")
+        }        
+    }
 
     const dados = data_return.Query_result;
 
-    const questoes = dados.map((Query_result) =>
-        <div className="zoom">
+    const questoes = dados.filter((Query_result)=>{
+        if(busca.search == null)
+            return Query_result
+        else if(Query_result.AUTOR.toLowerCase().includes(busca.search.toLowerCase()) || Query_result.CONTEUDO.toLowerCase().includes(busca.search.toLowerCase())){
+            return Query_result
+        }
+      }).map((Query_result) =>
+        <div className="zoom" >
             <div id="titulo">
-
                 <Row>
-                    <Col className="col-md-3">
+                    <Col className="col-md-2">
                         <label key={Query_result.SERIE} className="title">
                             Série: {Query_result.SERIE}
                         </label>
@@ -50,8 +93,13 @@ function webSearch({ data_return }) {
                         <label key={Query_result.AUTOR} className="title">
                             Autor: {Query_result.AUTOR}
                         </label>
+                        
+                    </Col>
+                    <Col className="col-md-1">
+                        <input type="checkbox"  onClick={() => {addArr(Query_result.ID_QUEST)}} />
                     </Col>
                 </Row>
+                
             </div>
             <div className="bordinha">
                 <Row>
@@ -62,7 +110,9 @@ function webSearch({ data_return }) {
                         <pre key={Query_result.DESCRICAO}>{Query_result.DESCRICAO}</pre>
                     </Col>
                 </Row>
+                   
             </div>
+        
             <br />
         </div>
     );
@@ -170,59 +220,45 @@ function webSearch({ data_return }) {
                 label.title {
                     font-weight: bold;
                 }
+                hr{
+                    border: 3px solid !important;
+                    width: 100%;
+                }
                 `}
                 </style>
                 <Container className="main">
-                    <Row>
-                        <Col className="col-md-4">
-                            <FormGroup>
-                                <Input type="select" name="serie" id="serie">
-                                    <option>Selecione um ano</option>
-                                    <option>1ºAno</option>
-                                    <option>2ºAno</option>
-                                    <option>3ºAno</option>
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col className="col-md-4">
-                            <FormGroup>
-                                <Input type="select" name="trimestre" id="trimestre">
-                                    <option>Selecione um Trimestre</option>
-                                    <option>1° Trimestre</option>
-                                    <option>2° Trimestre</option>
-                                    <option>3° Trimestre</option>
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                        <Col className="col-md-4">
-                            <FormGroup>
-                                <Input type="select" name="materia" id="materia">
-                                    <option>Selecione uma Matéria</option>
-                                    <option>Lingua Portuguesa e Literatura</option>
-                                    <option>Matematica</option>
-                                    <option>História</option>
-                                    <option>Geografia</option>
-                                    <option>Fisica</option>
-                                    <option>Quimíca</option>
-                                    <option>Biologia</option>
-                                    <option>Filosofia</option>
-                                    <option>Sociologia</option>
-                                    <option>Inglês Técnico</option>
-                                    <option>Educação Fisica</option>
-                                    <option>Banco de Dados</option>
-                                    <option>Linguagem de Programação</option>
-                                    <option>Programação de Aplicativos</option>
-                                    <option>Projetos de T.I</option>
-                                    <option>METC</option>
-                                </Input>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="col-md-12 ">
-                            <button type="submit" className="btn btnAnimado" id="btnPesquisar">Pesquisar</button>
-                        </Col>
-                    </Row>
+                <h6>Filtros:</h6>
+                <br />
+                <Row>
+
+                    <Col className="col-md-1">
+                        <FormGroup>
+                            <Label for="CONTEUDO">Tipo de Conteúdo:</Label>
+                        </FormGroup>
+                    </Col>
+                    <Col className="col-md-3">
+                        <FormGroup>
+                            <Input className="form-control mr-sm-2" type="text" name="CONTEUDO" id="CONTEUDO" onChange={(e) => searchSpace(e)} />
+                        </FormGroup>
+                    </Col>
+                    
+                    <Col className="col-md-1">
+                        <FormGroup>
+                            <Label for="AUTOR">Autor:</Label>
+                        </FormGroup>
+                    </Col>
+                    <Col className="col-md-3">
+                        <FormGroup>
+                            <Input className="form-control mr-sm-2" type="text" name="AUTOR" id="AUTOR" onChange={(e) => searchSpace(e)} />
+                        </FormGroup>
+                    </Col>
+                    <Col className="col-md-3">
+                        <button type="button" className="btn btnAnimado" onClick={MakeTest} id="btnCriar" >Montar Prova</button>
+                    </Col>
+                </Row>
+                <hr />
+                <br />
+                <br />
                     <Row>
                         <Col className="col-sm-12">
                             <Badge id="badgeConteudo">Conteúdo</Badge>
@@ -236,7 +272,7 @@ function webSearch({ data_return }) {
                     <br />
 
                 </Container>
-                <Footer />
+              
             </FadeIn>
         </div>
     );

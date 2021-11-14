@@ -276,7 +276,7 @@ function webQuestions({ data_return }) {
                     {questoes}
                 </Container>
             </FadeIn>
-            <Footer />
+          
         </div>
     );
 

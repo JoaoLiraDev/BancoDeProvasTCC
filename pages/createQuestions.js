@@ -1,7 +1,7 @@
-import Menu from "../components/topmenu";
-import Smallfooter from "../components/smallfooter";
 import React, { useState } from "react";
 import Head from "next/head";
+import Menu from "../components/topmenu";
+import Smallfooter from "../components/smallfooter";
 import { Form, FormGroup, Label, Input, Container, Row, Col, Button, Alert } from 'reactstrap';
 import { data, readyException } from "jquery";
 import { useForm } from 'react-hook-form'
