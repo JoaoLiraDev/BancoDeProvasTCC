@@ -163,6 +163,7 @@ function webQuestions({ data_return }) {
                 <title>
                     MyQuestions
                 </title>
+                <link rel="icon" href="/icone_short.png"/>
             </Head>
             <FadeIn>
                 <Menu />

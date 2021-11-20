@@ -28,8 +28,8 @@ function Recuperar(props) {
                 <title>
                     MyQuestions
                 </title>
+                <link rel="icon" href="/icone_short.png"/>
             </Head>
-
             <style>
                 {`.menu-custom{
                     background-color:#000;

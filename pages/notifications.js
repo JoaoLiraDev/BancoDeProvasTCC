@@ -30,9 +30,10 @@ function Config_notifications (props){
   return (
     <div>
       <Head>
-        <title>
-          MyQuestions
-        </title>
+          <title>
+              MyQuestions
+          </title>
+          <link rel="icon" href="/icone_short.png"/>
       </Head>
       <Menu />
       <style>

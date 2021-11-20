@@ -84,6 +84,7 @@ function editQuestion({ questEdit }) {
                 <title>
                     MyQuestions
                 </title>
+                <link rel="icon" href="/icone_short.png"/>
             </Head>
             <Menu />
 

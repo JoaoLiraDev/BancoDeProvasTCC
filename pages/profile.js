@@ -22,10 +22,11 @@ function Config_profile(props) {
 	return (
 		<div>
 			<Head>
-				<title>
-					MyQuestions
-				</title>
-			</Head>
+                <title>
+                    MyQuestions
+                </title>
+                <link rel="icon" href="/icone_short.png"/>
+            </Head>
 
 			<Menu />
 			<style>
